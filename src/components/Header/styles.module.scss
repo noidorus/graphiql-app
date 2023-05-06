@@ -1,5 +1,13 @@
 .header {
-  @apply flex justify-between;
+  max-width: 1440px;
+  margin: 0 auto;
+  transition: background-color 0.5s ease, height 0.5s ease;
+  @apply flex justify-between items-center sticky top-0 p-5 h-20 bg-black;
+
+  &_sticky {
+    background-color: #230555;
+    height: 60px;
+  }
 
   &__logo {
     filter: invert(28%) sepia(12%) saturate(272%) hue-rotate(290deg) brightness(110%) contrast(125%);

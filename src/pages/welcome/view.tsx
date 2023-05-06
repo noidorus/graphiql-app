@@ -7,8 +7,8 @@ import Header from '@/components/Header';
 export default function WelcomePageView() {
   return (
     <>
+      <Header />
       <PageContainer>
-        <Header />
         <div className={styles.welcome}>
           <div className={styles['welcome__wrapper']}>
             <div className={styles['welcome__title-block']}>
