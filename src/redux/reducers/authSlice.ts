@@ -5,11 +5,11 @@ import { auth } from '@/services/firebase';
 import type { AppDispatch } from '../setupStore';
 
 interface AuthState {
-  user: null;
+  userId: null | string;
 }
 
 const initialState: AuthState = {
-  user: null,
+  userId: null,
 };
 
 const authSlice = createSlice({
@@ -17,14 +17,15 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.user = action.payload;
+      state.userId = action.payload;
     },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
+      console.log(state);
       return {
         ...state,
-        ...action.payload,
+        ...action.payload.auth,
       };
     },
   },
@@ -38,7 +39,7 @@ export const { setUser } = actions;
 export const listenToAuthChanges = () => (dispatch: AppDispatch) => {
   auth.onAuthStateChanged((user) => {
     if (user) {
-      dispatch(setUser(user));
+      dispatch(setUser(user.uid));
     } else {
       dispatch(setUser(null));
     }

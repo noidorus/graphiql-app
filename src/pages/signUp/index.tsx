@@ -1,28 +1,25 @@
 import { useForm } from 'react-hook-form';
+import { registerWithEmailAndPassword } from '@/services/firebase';
 import { useRouter } from 'next/router';
 
-import { logInWithEmailAndPassword } from '@/services/firebase';
-import { AppState } from '@/redux/setupStore';
 import useUser from '@/lib/useUser';
-import { useState } from 'react';
 
 interface FormData {
   email: string;
   password: string;
 }
 
-export default function Login() {
-  const [loginPage, setLoginPage] = useState<'signIn' | 'signUp'>('signIn');
-  const router = useRouter();
+export default function SignUp() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
+  const router = useRouter();
   const { userId } = useUser('/main', true);
 
-  const onSubmit = handleSubmit(({ email, password }) => {
-    logInWithEmailAndPassword(email, password).then(() => {
+  const onSubmit = handleSubmit(async ({ email, password }) => {
+    registerWithEmailAndPassword(email, password).then(() => {
       router.push('/main');
     });
   });
@@ -32,9 +29,8 @@ export default function Login() {
       <input type="text" {...register('email')} placeholder="Email address" />
       <input type="password" {...register('password')} placeholder="Password" />
       <button className="btn" type="submit">
-        Login
+        Sign Up
       </button>
-      <p>Dont </p>
     </form>
   );
 }
