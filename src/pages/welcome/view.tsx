@@ -1,11 +1,14 @@
 import PageContainer from '@/components/PageContainer';
+import Footer from '@/components/Footer';
 
 import styles from './style.module.scss';
+import Header from '@/components/Header';
 
 export default function WelcomePageView() {
   return (
     <>
       <PageContainer>
+        <Header />
         <div className={styles.welcome}>
           <div className={styles['welcome__wrapper']}>
             <div className={styles['welcome__title-block']}>
@@ -83,6 +86,7 @@ export default function WelcomePageView() {
           </div>
         </div>
       </PageContainer>
+      <Footer />
     </>
   );
 }
