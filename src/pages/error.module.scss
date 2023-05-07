@@ -1,0 +1,19 @@
+.error {
+  @apply flex justify-center items-center gap-5 w-full;
+
+  &__block {
+    @apply flex justify-center items-center gap-5 flex-col;
+  }
+
+  &__title {
+    @apply text-5xl;
+  }
+
+  &__text {
+    @apply text-2xl;
+  }
+
+  &__img {
+    @apply w-2/5;
+  }
+}

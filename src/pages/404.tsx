@@ -10,10 +10,12 @@ const ErrorPage = () => {
   return (
     <PageContainer>
       <div className={styles.error}>
-        <h1 className={styles['error__title']}>Oops!</h1>
-        <p className={styles['error__text']}>You are lost</p>
-        <img src="/error.png" alt="error" />
-        <Button onClick={() => router.push('/')} text={'Go Home'} />
+        <img className={styles['error__img']} src="/error.png" alt="error" />
+        <div className={styles['error__block']}>
+          <h1 className={styles['error__title']}>Oops!</h1>
+          <p className={styles['error__text']}>You are lost</p>
+          <Button onClick={() => router.push('/')} text={'Go Home'} />
+        </div>
       </div>
     </PageContainer>
   );
