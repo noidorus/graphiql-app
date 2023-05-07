@@ -47,6 +47,7 @@ const Header = () => {
     <div className={`${styles.header} ${isSticky ? `${styles['header_sticky']}` : ''}`}>
       <img className={styles['header__logo']} src="/logo.svg" alt="logo" />
       <div className={styles['header__btns']}>
+          <input className={styles['header__theme']} type="checkbox" />
         {!user ? (
           <>
             <button className={styles['header__btn']} onClick={() => router.push('/login')}>
