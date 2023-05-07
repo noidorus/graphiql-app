@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import firebase from 'firebase/app';
 import 'firebase/auth';
-
-import styles from './styles.module.scss';
 import { auth } from '@/services/firebase';
 import { User } from 'firebase/auth';
+import Button from '../Button';
+
+import styles from './styles.module.scss';
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -47,24 +47,16 @@ const Header = () => {
     <div className={`${styles.header} ${isSticky ? `${styles['header_sticky']}` : ''}`}>
       <img className={styles['header__logo']} src="/logo.svg" alt="logo" />
       <div className={styles['header__btns']}>
-          <input className={styles['header__theme']} type="checkbox" />
+        <input className={styles['header__theme']} type="checkbox" />
         {!user ? (
           <>
-            <button className={styles['header__btn']} onClick={() => router.push('/login')}>
-              Sign In
-            </button>
-            <button className={styles['header__btn']} onClick={() => router.push('/registration')}>
-              Sign Up
-            </button>
+            <Button onClick={() => router.push('/login')} text={'Sign In'} />
+            <Button onClick={() => router.push('/signUp')} text={'Sign Up'} />
           </>
         ) : (
           <>
-            <button className={styles['header__btn']} onClick={handleSignOut}>
-              Sign Out
-            </button>
-            <button className={styles['header__btn']} onClick={() => router.push('/main')}>
-              Go to Main Page
-            </button>
+            <Button onClick={handleSignOut} text={'Sign Out'} />
+            <Button onClick={() => router.push('/main')} text={'Go to Main Page'} />
           </>
         )}
       </div>

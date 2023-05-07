@@ -3,7 +3,7 @@ import { MouseEventHandler } from 'react';
 import styles from './styles.module.scss';
 
 type ButtonProps = {
-  onClick: () => void | Promise<boolean>;
+  onClick: () => void | Promise<boolean> | Promise<void>;
   text: string;
 };
 
