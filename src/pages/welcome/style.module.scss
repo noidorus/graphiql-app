@@ -1,0 +1,73 @@
+.welcome {
+  @apply flex flex-col;
+
+  &__wrapper {
+    @apply flex flex-col;
+  }
+
+  &__title {
+    background: linear-gradient(108.92deg, #a359ff 46.18%, #00cbff 62.94%);
+    @apply text-7xl text-transparent bg-clip-text;
+
+    &-block {
+      @apply flex flex-col items-center gap-5;
+    }
+  }
+
+  &__subtitle {
+    background: linear-gradient(269.85deg, #7300ff -5.81%, #08bdff 105.13%);
+    @apply text-5xl text-transparent bg-clip-text leading-normal;
+  }
+
+  &__description {
+    &-block {
+      @apply mt-6 flex gap-4 w-full items-center justify-between;
+    }
+
+    &__text {
+      @apply w-3/5;
+    }
+
+    &__img {
+      max-width: 30%;
+      @apply w-full;
+    }
+  }
+
+  &__text {
+    @apply text-3xl;
+
+    &-block {
+      background: linear-gradient(269.85deg, #7300ff -5.81%, #08bdff 105.13%);
+      box-shadow: 0 0 10px #ffffff;
+      @apply p-4 rounded-lg;
+    }
+  }
+
+  &__developers {
+    background: linear-gradient(269.85deg, #7300ff -5.81%, #08bdff 105.13%);
+    box-shadow: 0 0 10px #ffffff;
+    @apply flex justify-center items-center p-5 rounded-xl flex flex-col justify-center items-center;
+
+    &-block {
+      @apply mt-8 flex gap-10 justify-between;
+    }
+
+    &__img {
+      @apply w-24 rounded-full;
+    }
+
+    &__name {
+      @apply text-center mt-3 text-2xl;
+    }
+
+    &__description {
+      @apply text-center text-lg;
+    }
+
+    &__title {
+      background: linear-gradient(269.85deg, #7300ff -5.81%, #08bdff 105.13%);
+      @apply text-3xl text-transparent bg-clip-text text-center font-bold mt-6;
+    }
+  }
+}

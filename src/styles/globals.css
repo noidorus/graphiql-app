@@ -14,11 +14,3 @@ body {
     rgb(var(--background-start-rgb));
   @apply m-0 h-full;
 }
-
-.form {
-  @apply text-black flex flex-col w-80 mx-auto mt-20 gap-5;
-}
-
-.btn {
-  @apply bg-white;
-}
