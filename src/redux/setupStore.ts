@@ -1,15 +1,32 @@
 import { configureStore, combineReducers, ThunkAction, Action } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 
-import auth, { listenToAuthChanges } from './reducers/authSlice';
+import auth, { listenToAuthChanges, AuthState } from './reducers/authSlice';
 
 const rootReduser = combineReducers({
   auth,
 });
 
+const getPreloadState = () => {
+  let initState: AuthState;
+  if (typeof window !== 'undefined') {
+    const data = localStorage.getItem('auth') || JSON.stringify({ user: null });
+    initState = JSON.parse(data) as AuthState;
+  } else {
+    initState = { user: null };
+  }
+
+  return initState;
+};
+
 const setupStore = () => {
+  const authState = getPreloadState();
+
   const store = configureStore({
     reducer: rootReduser,
+    preloadedState: {
+      auth: authState,
+    },
     devTools: process.env.NODE_ENV !== 'production',
   });
 

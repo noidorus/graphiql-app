@@ -1,15 +1,16 @@
+import { User } from 'firebase/auth';
 import { createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
 
 import { auth } from '@/services/firebase';
 import type { AppDispatch } from '../setupStore';
 
-interface AuthState {
-  userId: null | string;
-}
+export type AuthState = {
+  user: User | null;
+};
 
 const initialState: AuthState = {
-  userId: null,
+  user: null,
 };
 
 const authSlice = createSlice({
@@ -17,7 +18,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.userId = action.payload;
+      state.user = action.payload;
     },
   },
   extraReducers: {
@@ -39,8 +40,13 @@ export const { setUser } = actions;
 export const listenToAuthChanges = () => (dispatch: AppDispatch) => {
   auth.onAuthStateChanged((user) => {
     if (user) {
-      dispatch(setUser(user.uid));
+      localStorage.setItem('auth', JSON.stringify({ user }));
+      dispatch(setUser(user));
     } else {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('auth');
+      }
+
       dispatch(setUser(null));
     }
   });

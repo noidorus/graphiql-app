@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, addDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { getFirestore, addDoc, collection } from 'firebase/firestore';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -7,7 +7,7 @@ import {
   signOut,
 } from 'firebase/auth';
 
-export type User = {
+export type UserData = {
   id: string;
   email: string;
 };
@@ -40,7 +40,7 @@ const registerWithEmailAndPassword = async (email: string, password: string) => 
 
 const logInWithEmailAndPassword = async (email: string, password: string) => {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
   }
