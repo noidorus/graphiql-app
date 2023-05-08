@@ -6,6 +6,7 @@ import { User } from 'firebase/auth';
 import Button from '../Button';
 
 import styles from './styles.module.scss';
+import ROUTES from '@/constants/routes';
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
@@ -50,13 +51,17 @@ const Header = () => {
         <input className={styles['header__theme']} type="checkbox" />
         {!user ? (
           <>
-            <Button onClick={() => router.push('/login')} text={'Sign In'} />
-            <Button onClick={() => router.push('/signUp')} text={'Sign Up'} />
+            <Button type="button" onClick={() => router.push(ROUTES.SIGN_IN)} text={'Sign In'} />
+            <Button type="button" onClick={() => router.push(ROUTES.SIGN_UP)} text={'Sign Up'} />
           </>
         ) : (
           <>
-            <Button onClick={handleSignOut} text={'Sign Out'} />
-            <Button onClick={() => router.push('/main')} text={'Go to Main Page'} />
+            <Button type="button" onClick={handleSignOut} text={'Sign Out'} />
+            <Button
+              type="button"
+              onClick={() => router.push(ROUTES.APP)}
+              text={'Go to Main Page'}
+            />
           </>
         )}
       </div>

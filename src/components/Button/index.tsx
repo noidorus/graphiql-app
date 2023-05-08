@@ -3,14 +3,15 @@ import { MouseEventHandler } from 'react';
 import styles from './styles.module.scss';
 
 type ButtonProps = {
-  onClick: () => void | Promise<boolean> | Promise<void>;
+  onClick?: () => void | Promise<boolean> | Promise<void>;
+  type: 'button' | 'reset' | 'submit';
   text: string;
 };
 
-const Button = (props: ButtonProps) => {
+const Button = ({ onClick, type = 'button', text }: ButtonProps) => {
   return (
-    <button className={styles.btn} onClick={props.onClick}>
-      {props.text}
+    <button type={type} className={styles.btn} onClick={onClick}>
+      {text}
     </button>
   );
 };
