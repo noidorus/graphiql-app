@@ -2,8 +2,6 @@ import { useForm } from 'react-hook-form';
 import { registerWithEmailAndPassword } from '@/services/firebase';
 import { useRouter } from 'next/router';
 
-import useUser from '@/lib/useUser';
-
 interface FormData {
   email: string;
   password: string;

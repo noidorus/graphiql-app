@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, addDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { getFirestore, addDoc, collection } from 'firebase/firestore';
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -40,12 +40,7 @@ const registerWithEmailAndPassword = async (email: string, password: string) => 
 
 const logInWithEmailAndPassword = async (email: string, password: string) => {
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    // const { uid } = userCredential.user;
-
-    // const data = JSON.stringify({ uid: uid });
-
-    // localStorage.setItem('auth', data);
+    signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
   }

@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import { logInWithEmailAndPassword } from '@/services/firebase';
 import { AppState } from '@/redux/setupStore';
-import useUser from '@/lib/useUser';
-import { useState } from 'react';
 
 interface FormData {
   email: string;

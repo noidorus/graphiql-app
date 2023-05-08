@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import { logout } from '@/services/firebase';
 import { AppState } from '@/redux/setupStore';
-import useUser from '@/lib/useUser';
 
 export default function Main() {
   return (
