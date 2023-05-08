@@ -19,7 +19,6 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const { userId } = useUser('/main', true);
 
   const onSubmit = handleSubmit(({ email, password }) => {
     logInWithEmailAndPassword(email, password).then(() => {

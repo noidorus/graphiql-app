@@ -16,7 +16,6 @@ export default function SignUp() {
     formState: { errors },
   } = useForm<FormData>();
   const router = useRouter();
-  const { userId } = useUser('/main', true);
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
     registerWithEmailAndPassword(email, password).then(() => {

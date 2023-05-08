@@ -7,7 +7,7 @@ import {
   signOut,
 } from 'firebase/auth';
 
-export type User = {
+export type UserData = {
   id: string;
   email: string;
 };
@@ -40,7 +40,12 @@ const registerWithEmailAndPassword = async (email: string, password: string) => 
 
 const logInWithEmailAndPassword = async (email: string, password: string) => {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    // const { uid } = userCredential.user;
+
+    // const data = JSON.stringify({ uid: uid });
+
+    // localStorage.setItem('auth', data);
   } catch (err) {
     console.error(err);
   }

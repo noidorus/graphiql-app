@@ -39,8 +39,10 @@ export const { setUser } = actions;
 export const listenToAuthChanges = () => (dispatch: AppDispatch) => {
   auth.onAuthStateChanged((user) => {
     if (user) {
+      localStorage.setItem('auth', JSON.stringify({ uid: user.uid }));
       dispatch(setUser(user.uid));
     } else {
+      localStorage.removeItem('auth');
       dispatch(setUser(null));
     }
   });
