@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import nookies from 'nookies';
 
 import { registerWithEmailAndPassword } from '@/services/firebase';
 import ROUTES from '@/constants/routes';
@@ -8,13 +9,33 @@ import Button from '@/components/Button';
 import PageContainer from '@/components/PageContainer';
 
 import styles from './style.module.scss';
-import { useSelector } from 'react-redux';
-import { AppState } from '@/redux/setupStore';
+import { GetServerSidePropsContext } from 'next';
+import { firebaseAdmin } from '@/services/firebaseAdmin';
 
 interface FormData {
   email: string;
   password: string;
 }
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  try {
+    const cookies = nookies.get(ctx);
+    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+    const { uid } = token;
+
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/app',
+      },
+      props: { uid },
+    };
+  } catch (err) {
+    return {
+      props: {} as never,
+    };
+  }
+};
 
 export default function SignUp() {
   const {
@@ -23,11 +44,6 @@ export default function SignUp() {
     formState: { errors },
   } = useForm<FormData>();
   const router = useRouter();
-  const user = useSelector(({ auth }: AppState) => auth.user);
-
-  if (user) {
-    router.push(ROUTES.APP);
-  }
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
     registerWithEmailAndPassword(email, password).then(() => {

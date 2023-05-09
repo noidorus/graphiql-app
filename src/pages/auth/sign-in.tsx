@@ -1,20 +1,40 @@
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import Link from 'next/link';
+import nookies from 'nookies';
 
-import { logInWithEmailAndPassword } from '@/services/firebase';
+import { auth, logInWithEmailAndPassword } from '@/services/firebase';
 import PageContainer from '@/components/PageContainer';
 import ROUTES from '@/constants/routes';
 import Button from '@/components/Button';
 
 import styles from './style.module.scss';
-import { useSelector } from 'react-redux';
-import { AppState } from '@/redux/setupStore';
-
+import { GetServerSidePropsContext } from 'next';
+import { firebaseAdmin } from '@/services/firebaseAdmin';
 interface FormData {
   email: string;
   password: string;
 }
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  try {
+    const cookies = nookies.get(ctx);
+    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+    const { uid } = token;
+
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/app',
+      },
+      props: { uid },
+    };
+  } catch (err) {
+    return {
+      props: {} as never,
+    };
+  }
+};
 
 export default function Login() {
   const {
@@ -22,17 +42,12 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const router = useRouter();
 
-  const user = useSelector(({ auth }: AppState) => auth.user);
-
-  if (user) {
-    router.push(ROUTES.APP);
-  }
-
-  const onSubmit = handleSubmit(({ email, password }) => {
+  const onSubmit = handleSubmit(async ({ email, password }) => {
     logInWithEmailAndPassword(email, password).then(() => {
-      router.push(ROUTES.APP);
+      setTimeout(() => {
+        Router.push(ROUTES.APP);
+      }, 1000);
     });
   });
 

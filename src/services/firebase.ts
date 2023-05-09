@@ -1,10 +1,12 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApp } from 'firebase/app';
 import { getFirestore, addDoc, collection } from 'firebase/firestore';
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  setPersistence,
+  browserSessionPersistence,
 } from 'firebase/auth';
 
 export type UserData = {
@@ -21,7 +23,20 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FB_APP_ID,
 };
 
-const firebase = initializeApp(firebaseConfig);
+const getFirebaseApp = (config = {}) => {
+  try {
+    return getApp();
+  } catch (e) {
+    // console.log(e);
+    return initializeApp(config);
+  }
+};
+
+const firebase = getFirebaseApp(firebaseConfig);
+// typeof window !== 'undefined' && !getApps().length ? initializeApp(firebaseConfig) : getApp();
+// const firebase =
+//   typeof window !== 'undefined' && !getApps().length ? initializeApp(firebaseConfig) : getApp();
+
 const db = getFirestore(firebase);
 const auth = getAuth(firebase);
 
@@ -49,5 +64,7 @@ const logInWithEmailAndPassword = async (email: string, password: string) => {
 const logout = async () => {
   signOut(auth);
 };
+
+setPersistence(auth, browserSessionPersistence);
 
 export { firebase, db, auth, registerWithEmailAndPassword, logInWithEmailAndPassword, logout };
