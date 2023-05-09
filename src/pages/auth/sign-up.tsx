@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
+import Router from 'next/router';
 import Link from 'next/link';
 import nookies from 'nookies';
 
@@ -43,11 +43,12 @@ export default function SignUp() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  const router = useRouter();
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
     registerWithEmailAndPassword(email, password).then(() => {
-      router.push(ROUTES.APP);
+      setTimeout(() => {
+        Router.push(ROUTES.APP);
+      }, 1000);
     });
   });
 
