@@ -3,14 +3,14 @@ import Router from 'next/router';
 import Link from 'next/link';
 import nookies from 'nookies';
 
-import { auth, logInWithEmailAndPassword } from '@/services/firebase';
+import { auth, logInWithEmailAndPassword } from '@/firebase/firebaseClient';
 import PageContainer from '@/components/PageContainer';
 import ROUTES from '@/constants/routes';
 import Button from '@/components/Button';
 
 import styles from './style.module.scss';
 import { GetServerSidePropsContext } from 'next';
-import { firebaseAdmin } from '@/services/firebaseAdmin';
+import { firebaseAdmin } from '@/firebase/firebaseAdmin';
 interface FormData {
   email: string;
   password: string;

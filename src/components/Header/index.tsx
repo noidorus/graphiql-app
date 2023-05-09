@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { auth } from '@/services/firebase';
+import { auth } from '@/firebase/firebaseClient';
 import ROUTES from '@/constants/routes';
 import { useAuth } from '../authProvider/AuthProvider';
 

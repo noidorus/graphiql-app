@@ -3,7 +3,7 @@ import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 
 import Header from '@/components/Header';
 import PageContainer from '@/components/PageContainer';
-import { firebaseAdmin } from '@/services/firebaseAdmin';
+import { firebaseAdmin } from '@/firebase/firebaseAdmin';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
