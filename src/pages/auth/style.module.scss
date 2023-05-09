@@ -1,0 +1,67 @@
+.form {
+  @apply flex flex-col w-96 gap-8 mt-24;
+
+  &__wrapper {
+    @apply flex items-center justify-center gap-24 mt-16;
+  }
+
+  &__title {
+    background: linear-gradient(108.92deg, #a359ff 46.18%, #00cbff 62.94%);
+    @apply flex flex-col gap-6 text-5xl text-transparent bg-clip-text text-center mb-8 pb-2;
+  }
+
+  &__controls {
+    @apply flex flex-col gap-12;
+  }
+
+  &__item {
+    @apply relative;
+
+    input + label {
+      @apply absolute bg-black text-blue-600 inline-block duration-500 font-semibold text-sm;
+      @apply -top-6 left-0;
+
+      border-left: 5px solid black;
+      padding: 2px 9px 2px 5px;
+      transition-property: background, border-color, color, padding, top, left;
+    }
+
+    input {
+      @apply w-full  appearance-none text-xl bg-white font-semibold duration-500 outline-none;
+      @apply rounded-md border-2 border-blue-700;
+
+      font-family: 'Open Sans', sans-serif;
+      padding: 13px 12px 16px 12px;
+      transition-property: border-color, padding-top, padding-bottom;
+
+      -webkit-appearance: none;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    input::placeholder {
+      color: #9c9c9c;
+      font-weight: 400;
+    }
+
+    input:focus {
+      @apply pt-6 pb-1;
+    }
+
+    input:focus + label {
+      @apply bg-blue-600 text-white top-px border-blue-600;
+      border-radius: 8px 0 8px 0;
+    }
+  }
+
+  input {
+    @apply text-black;
+  }
+
+  p {
+    @apply text-white text-center;
+  }
+
+  a {
+    @apply text-blue-700;
+  }
+}
