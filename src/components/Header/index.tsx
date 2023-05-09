@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import 'firebase/auth';
-import { auth } from '@/services/firebase';
-import { User } from 'firebase/auth';
-import Button from '../Button';
 
-import styles from './styles.module.scss';
+import { auth } from '@/services/firebase';
 import ROUTES from '@/constants/routes';
+import { useAuth } from '../authProvider/AuthProvider';
+
+import Button from '../Button';
+import styles from './styles.module.scss';
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
+  const { user } = useAuth();
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -28,17 +28,10 @@ const Header = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => setUser(user));
-
-    return unsubscribe;
-  }, []);
-
   const handleSignOut = async () => {
     try {
       await auth.signOut();
-      setUser(null);
-      router.push('/welcome');
+      router.push(ROUTES.WELCOME);
     } catch (error) {
       console.error(error);
     }
