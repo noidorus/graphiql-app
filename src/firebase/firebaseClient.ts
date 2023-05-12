@@ -33,10 +33,6 @@ const getFirebaseApp = (config = {}) => {
 };
 
 const firebase = getFirebaseApp(firebaseConfig);
-// typeof window !== 'undefined' && !getApps().length ? initializeApp(firebaseConfig) : getApp();
-// const firebase =
-//   typeof window !== 'undefined' && !getApps().length ? initializeApp(firebaseConfig) : getApp();
-
 const db = getFirestore(firebase);
 const auth = getAuth(firebase);
 
@@ -54,11 +50,7 @@ const registerWithEmailAndPassword = async (email: string, password: string) => 
 };
 
 const logInWithEmailAndPassword = async (email: string, password: string) => {
-  try {
-    signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.error(err);
-  }
+  return signInWithEmailAndPassword(auth, email, password);
 };
 
 const logout = async () => {
