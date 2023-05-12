@@ -30,10 +30,12 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@swc-node/register": "^1.6.5",
     "firebase": "^9.21.0",
     "next-redux-wrapper": "^8.1.0",
-    "@swc-node/register": "^1.6.5",
+    "nextjs-progressbar": "^0.0.16",
     "prettier": "^2.8.8",
+    "react-error-boundary": "^4.0.4",
     "react-hook-form": "^7.43.9",
     "redux-firestore": "^2.0.0"
   }

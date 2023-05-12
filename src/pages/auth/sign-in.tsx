@@ -25,7 +25,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       redirect: {
         permanent: false,
-        destination: '/app',
+        destination: ROUTES.APP,
       },
       props: { uid },
     };
