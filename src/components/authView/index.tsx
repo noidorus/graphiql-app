@@ -29,9 +29,8 @@ const AuthView = ({ authCallback, page }: Props) => {
   const onSubmit = handleSubmit(async ({ email, password }) => {
     try {
       await authCallback(email, password);
-      setTimeout(() => {
-        Router.push(ROUTES.APP);
-      }, 1000);
+
+      Router.push(ROUTES.APP);
     } catch (e) {
       const err = getAuthError(e);
       setAuthError(err);
