@@ -1,5 +1,6 @@
 import nookies from 'nookies';
 import { GetServerSidePropsContext } from 'next';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { registerWithEmailAndPassword } from '@/firebase/firebaseClient';
 import { firebaseAdmin } from '@/firebase/firebaseAdmin';
@@ -11,7 +12,11 @@ export default function SignUp() {
     return await registerWithEmailAndPassword(email, password);
   };
 
-  return <AuthView authCallback={onSignUp} page="SIGN_UP" />;
+  return (
+    <ErrorBoundary fallback={<div>Something went wrong...</div>}>
+      <AuthView authCallback={onSignUp} page="SIGN_UP" />
+    </ErrorBoundary>
+  );
 }
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
