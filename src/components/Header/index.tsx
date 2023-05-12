@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { auth } from '@/firebase/firebaseClient';
 import ROUTES from '@/constants/routes';
-import { useAuth } from '../authProvider/AuthProvider';
+import { useAuth } from '../authProvider';
 
 import Button from '../Button';
 import styles from './styles.module.scss';
