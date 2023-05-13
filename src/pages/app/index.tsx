@@ -4,6 +4,7 @@ import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 import Header from '@/components/Header';
 import PageContainer from '@/components/PageContainer';
 import { firebaseAdmin } from '@/firebase/firebaseAdmin';
+import ROUTES from '@/constants/routes';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
@@ -18,7 +19,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       redirect: {
         permanent: false,
-        destination: '/auth/sign-in',
+        destination: ROUTES.SIGN_IN,
       },
       props: {} as never,
     };

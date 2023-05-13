@@ -33,32 +33,22 @@ const getFirebaseApp = (config = {}) => {
 };
 
 const firebase = getFirebaseApp(firebaseConfig);
-// typeof window !== 'undefined' && !getApps().length ? initializeApp(firebaseConfig) : getApp();
-// const firebase =
-//   typeof window !== 'undefined' && !getApps().length ? initializeApp(firebaseConfig) : getApp();
-
 const db = getFirestore(firebase);
 const auth = getAuth(firebase);
 
 const registerWithEmailAndPassword = async (email: string, password: string) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
+  return await createUserWithEmailAndPassword(auth, email, password).then(async (res) => {
     await addDoc(collection(db, 'users'), {
-      id: user.uid,
+      id: res.user.uid,
       email,
     });
-  } catch (err) {
-    console.error(err);
-  }
+
+    return res;
+  });
 };
 
 const logInWithEmailAndPassword = async (email: string, password: string) => {
-  try {
-    signInWithEmailAndPassword(auth, email, password);
-  } catch (err) {
-    console.error(err);
-  }
+  return signInWithEmailAndPassword(auth, email, password);
 };
 
 const logout = async () => {
