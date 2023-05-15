@@ -1,0 +1,17 @@
+.app {
+  @apply flex w-full gap-5 h-screen;
+
+  &__sidebar {
+    @apply flex flex-col justify-between gap-5 items-center;
+
+    &_docs,
+    &_refetch {
+      @apply w-7 h-7 bg-transparent;
+    }
+
+    &__img {
+      filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(114deg) brightness(104%)
+        contrast(101%);
+    }
+  }
+}
