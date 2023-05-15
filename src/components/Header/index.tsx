@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import { auth } from '@/firebase/firebaseClient';
 import ROUTES from '@/constants/routes';
@@ -12,6 +13,7 @@ const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
   const router = useRouter();
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -44,8 +46,16 @@ const Header = () => {
         <LanguageSwitcher />
         {!user ? (
           <>
-            <Button type="button" onClick={() => router.push(ROUTES.SIGN_IN)} text={'Sign In'} />
-            <Button type="button" onClick={() => router.push(ROUTES.SIGN_UP)} text={'Sign Up'} />
+            <Button
+              type="button"
+              onClick={() => router.push(ROUTES.SIGN_IN)}
+              text={t('Btn-signin')}
+            />
+            <Button
+              type="button"
+              onClick={() => router.push(ROUTES.SIGN_UP)}
+              text={t('Btn-signup')}
+            />
           </>
         ) : (
           <>

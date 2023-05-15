@@ -1,6 +1,10 @@
+import { useTranslation } from 'react-i18next';
+
 import styles from './styles.module.scss';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.footer}>
       <div className={styles['footer__developers']}>
@@ -15,7 +19,7 @@ const Footer = () => {
         </a>
       </div>
       <div className={styles['footer__copyright']}>
-        <p>© 2023 All Rights Reserved.</p>
+        <p>{t('Footer-rights')}</p>
       </div>
       <a href="https://rs.school/react/" target="_blank">
         <img className={styles['footer__logo']} src="/rs-school.svg" alt="rs-school" />

@@ -10,5 +10,8 @@
   "Maria": "Maria",
   "Maria-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie.",
   "Anna": "Anna",
-  "Anna-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie."
+  "Anna-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie.",
+  "Btn-signin": "Sign in",
+  "Btn-signup": "Sign up",
+  "Footer-rights": "© 2023 All Rights Reserved."
 }
