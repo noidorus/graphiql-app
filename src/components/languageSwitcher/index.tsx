@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './styles.module.scss';
 
-function LanguageSwitcher() {
+const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
 
   const handleChangeLanguage = (event: React.ChangeEvent<HTMLInputElement>) => {

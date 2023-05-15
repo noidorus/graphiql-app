@@ -1,15 +1,16 @@
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import i18n from 'i18next';
 
 const schema = Yup.object().shape({
   email: Yup.string()
-    .required('Required field!')
-    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Write correct email!'),
+    .required(i18n.t('validation-required') || '')
+    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, i18n.t('validation-email') || ''),
   password: Yup.string()
-    .required('Required field!')
+    .required(i18n.t('validation-required') || '')
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#-_?&])[A-Za-z\d@$!%*#-_?&]{8,}$/,
-      'Min 8 symbols, one letter, one digit, one special character!'
+      i18n.t('validation-password') || ''
     ),
 });
 

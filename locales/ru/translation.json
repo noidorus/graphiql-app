@@ -15,6 +15,9 @@
   "btn-signup": "Зарегистрироваться",
   "btn-signout": "Выйти",
   "btn-go-main": "Перейти на главную",
+  "validation-required": "Поле обязательно для заполнения!",
+  "validation-email": "Введен некорректный email!",
+  "validation-password": "Минимум 8 символов, одна буква, одна цифра, один специальный символ!",
   "Footer-rights": "© 2023 Все права защищены.",
   "404-oops": "Упс!",
   "404-error": "Вы потерялись",
@@ -26,7 +29,7 @@
   "sign-email": "Электронная почта",
   "sign-password": "Пароль",
   "sign-account-false": "Нет учетной записи? ",
-  "sign-account-true":"Уже есть аккаунт? ",
+  "sign-account-true": "Уже есть аккаунт? ",
   "sign-placeholder-email": "Введите вашу электронную почту",
   "sign-placeholder-password": "Введите ваш пароль",
   "sign-required": "Обязательное поле!"
