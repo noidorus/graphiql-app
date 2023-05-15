@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-
 import { auth } from '@/firebase/firebaseClient';
 import ROUTES from '@/constants/routes';
 import { useAuth } from '../authProvider';
-
 import Button from '../Button';
+import LanguageSwitcher from '../languageSwitcher';
+
 import styles from './styles.module.scss';
 
 const Header = () => {
@@ -41,7 +41,7 @@ const Header = () => {
     <div className={`${styles.header} ${isSticky ? `${styles['header_sticky']}` : ''}`}>
       <img className={styles['header__logo']} src="/logo.svg" alt="logo" />
       <div className={styles['header__btns']}>
-        <input className={styles['header__theme']} type="checkbox" />
+        <LanguageSwitcher />
         {!user ? (
           <>
             <Button type="button" onClick={() => router.push(ROUTES.SIGN_IN)} text={'Sign In'} />

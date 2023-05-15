@@ -1,10 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import PageContainer from '@/components/PageContainer';
 import Footer from '@/components/Footer';
-
-import styles from './style.module.scss';
 import Header from '@/components/Header';
 
+import styles from './style.module.scss';
+
 export default function WelcomePage() {
+  const { t } = useTranslation();
+
   return (
     <>
       <Header />
@@ -12,25 +15,17 @@ export default function WelcomePage() {
         <div className={styles.welcome}>
           <div className={styles['welcome__wrapper']}>
             <div className={styles['welcome__title-block']}>
-              <h1 className={styles['welcome__title']}>Welcome to the GraphiQL App</h1>
-              <p className={styles['welcome__subtitle']}>Good to see you here</p>
+              <h1 className={styles['welcome__title']}>{t('title')}</h1>
+              <p className={styles['welcome__subtitle']}>{t('subtitle')}</p>
             </div>
             <div className={styles['welcome__description-block']}>
               <div className={styles['welcome__description__text']}>
                 <div className={styles['welcome__text-block']}>
-                  <p className={styles['welcome__text']}>
-                    GraphiQL is a playground/IDE for graphQL requests.
-                  </p>
-                  <p className={styles['welcome__text']}>
-                    RS School is free-of-charge and community-based education program conducted by
-                    The Rolling Scopes developer community since 2013.
-                  </p>
-                  <p className={styles['welcome__text']}>
-                    React course covers fundamentals, real-world applications, popular libraries and
-                    tools, preparing students for real React projects.
-                  </p>
+                  <p className={styles['welcome__text']}>{t('graphiQL')}</p>
+                  <p className={styles['welcome__text']}>{t('rsschool')}</p>
+                  <p className={styles['welcome__text']}>{t('course')}</p>
                 </div>
-                <p className={styles['welcome__developers__title']}>Our team</p>
+                <p className={styles['welcome__developers__title']}>{t('team')}</p>
                 <div className={styles['welcome__developers-block']}>
                   <div className={styles['welcome__developers']}>
                     <div>
@@ -39,12 +34,11 @@ export default function WelcomePage() {
                         src="https://i.postimg.cc/9XppkcnP/image.jpg"
                         alt="photo"
                       />
-                      <p className={styles['welcome__developers__name']}>Rodion</p>
+                      <p className={styles['welcome__developers__name']}>{t('Rodion')}</p>
                     </div>
 
                     <p className={styles['welcome__developers__description']}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel
-                      velit commodo molestie.
+                      {t('Rodion-description')}
                     </p>
                   </div>
                   <div className={styles['welcome__developers']}>
@@ -54,11 +48,10 @@ export default function WelcomePage() {
                         src="https://i.postimg.cc/T14WXNmx/image.jpg"
                         alt="photo"
                       />
-                      <p className={styles['welcome__developers__name']}>Maria</p>
+                      <p className={styles['welcome__developers__name']}>{t('Maria')}</p>
                     </div>
                     <p className={styles['welcome__developers__description']}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel
-                      velit commodo molestie.
+                      {t('Maria-description')}
                     </p>
                   </div>
                   <div className={styles['welcome__developers']}>
@@ -68,11 +61,10 @@ export default function WelcomePage() {
                         src="https://i.postimg.cc/KcD2sgb9/image.png"
                         alt="photo"
                       />
-                      <p className={styles['welcome__developers__name']}>Anna</p>
+                      <p className={styles['welcome__developers__name']}>{t('Anna')}</p>
                     </div>
                     <p className={styles['welcome__developers__description']}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel
-                      velit commodo molestie.
+                      {t('Anna-description')}
                     </p>
                   </div>
                 </div>

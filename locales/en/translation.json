@@ -1,0 +1,14 @@
+{
+  "title": "Welcome to the GraphiQL App",
+  "subtitle": "Good to see you here",
+  "graphiQL": " GraphiQL is a playground/IDE for graphQL requests.",
+  "rsschool": "RS School is free-of-charge and community-based education program conducted by The Rolling Scopes developer community since 2013.",
+  "course": "  React course covers fundamentals, real-world applications, popular libraries and tools, preparing students for real React projects.",
+  "team": "Our team",
+  "Rodion": "Rodion",
+  "Rodion-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie.",
+  "Maria": "Maria",
+  "Maria-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie.",
+  "Anna": "Anna",
+  "Anna-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie."
+}
