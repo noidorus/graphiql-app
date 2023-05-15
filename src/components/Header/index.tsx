@@ -49,21 +49,21 @@ const Header = () => {
             <Button
               type="button"
               onClick={() => router.push(ROUTES.SIGN_IN)}
-              text={t('Btn-signin')}
+              text={t('btn-signin')}
             />
             <Button
               type="button"
               onClick={() => router.push(ROUTES.SIGN_UP)}
-              text={t('Btn-signup')}
+              text={t('btn-signup')}
             />
           </>
         ) : (
           <>
-            <Button type="button" onClick={handleSignOut} text={'Sign Out'} />
+            <Button type="button" onClick={handleSignOut} text={t('btn-signout')} />
             <Button
               type="button"
               onClick={() => router.push(ROUTES.APP)}
-              text={'Go to Main Page'}
+              text={t('btn-go-main')}
             />
           </>
         )}
