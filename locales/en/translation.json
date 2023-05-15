@@ -13,5 +13,7 @@
   "Anna-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie.",
   "Btn-signin": "Sign in",
   "Btn-signup": "Sign up",
-  "Footer-rights": "© 2023 All Rights Reserved."
+  "Footer-rights": "© 2023 All Rights Reserved.",
+  "404-oops": "Oops!",
+  "404-error": "You are lost"
 }
