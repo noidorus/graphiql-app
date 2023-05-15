@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Button from '@/components/Button';
 import PageContainer from '@/components/PageContainer';
 
-import styles from './error.module.scss';
+import styles from './404.module.scss';
 
 const ErrorPage = () => {
   const router = useRouter();
