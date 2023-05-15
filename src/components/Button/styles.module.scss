@@ -2,4 +2,8 @@
   background: linear-gradient(black, black) padding-box,
     linear-gradient(to right, #5389ff, #a359ff) border-box;
   @apply relative inline-flex justify-center items-center px-8 py-2 rounded-lg border-2 border-transparent;
+
+  @media (max-width: 560px) {
+    @apply text-sm px-4;
+  }
 }
