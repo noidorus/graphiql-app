@@ -1,5 +1,7 @@
 import nookies from 'nookies';
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
+import { useEffect } from 'react';
+import Router from 'next/router';
 
 import Header from '@/components/Header';
 import PageContainer from '@/components/PageContainer';
@@ -10,10 +12,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     const cookies = nookies.get(ctx);
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
-    const { uid } = token;
+    const { uid, exp } = token;
 
     return {
-      props: { uid },
+      props: { uid, exp },
     };
   } catch (err) {
     return {
@@ -26,7 +28,17 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-const AppPage = (props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  useEffect(() => {
+    const handle = setInterval(async () => {
+      const currTime = Math.floor(Date.now() / 1000);
+      if (currTime > expTime) {
+        Router.push(ROUTES.WELCOME);
+      }
+    }, 60 * 1000);
+    return () => clearInterval(handle);
+  }, []);
+
   return (
     <>
       <Header />
