@@ -1,8 +1,9 @@
-import { useForm } from 'react-hook-form';
 import Router from 'next/router';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { UserCredential } from 'firebase/auth';
+import { RingLoader } from 'react-spinners';
 
 import PageContainer from '@/components/PageContainer';
 import ROUTES from '@/constants/routes';
@@ -25,15 +26,19 @@ const AuthView = ({ authCallback, page }: Props) => {
     formState: { errors },
   } = useForm<schemaType>({ resolver });
   const [authError, setAuthError] = useState<string>('');
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
+    setLoading(true);
     try {
       await authCallback(email, password);
 
+      setLoading(false);
       Router.push(ROUTES.APP);
     } catch (e) {
       const err = getAuthError(e);
       setAuthError(err);
+      setLoading(false);
     }
   });
 
@@ -46,6 +51,12 @@ const AuthView = ({ authCallback, page }: Props) => {
         </h2>
 
         <form className={styles['form']} onSubmit={onSubmit}>
+          {loading ? (
+            <div className={styles['form__loading']}>
+              <RingLoader loading={loading} color={'#a359ff'} />
+            </div>
+          ) : null}
+
           {authError && <p className={styles['form__error']}>{authError}</p>}
           <div className={styles['form__controls']}>
             <div className={styles['form__item']}>
@@ -81,7 +92,11 @@ const AuthView = ({ authCallback, page }: Props) => {
             </div>
           </div>
 
-          <Button type="submit" text={page === 'SIGN_IN' ? 'Sign In' : 'Sign Up'} />
+          <Button
+            type="submit"
+            text={page === 'SIGN_IN' ? 'Sign In' : 'Sign Up'}
+            iconProps={{ src: '/log-in.svg', alt: 'log-in icon', size: 32 }}
+          />
 
           <p>
             {`Don't have an account? `}

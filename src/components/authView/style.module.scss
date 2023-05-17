@@ -1,8 +1,14 @@
 .form {
-  @apply flex flex-col max-w-md gap-8 text-white;
+  @apply flex flex-col max-w-md gap-8 text-white relative;
 
   &__wrapper {
     @apply flex justify-center gap-24 mt-32;
+  }
+
+  &__loading {
+    background-color: rgba(0, 0, 0, 0.7);
+    @apply flex justify-center items-center absolute inset-0;
+    z-index: 100;
   }
 
   &__title {
