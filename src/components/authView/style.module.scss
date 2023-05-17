@@ -6,8 +6,23 @@
   }
 
   &__title {
-    background: linear-gradient(108.92deg, #a359ff 46.18%, #00cbff 62.94%);
-    @apply flex flex-col gap-6 text-5xl text-transparent bg-clip-text text-center pb-2 mt-8;
+    @apply flex flex-col gap-6 text-5xl text-center pb-2 mt-8;
+
+    span {
+      background: linear-gradient(108.92deg, #a359ff 46.18%, #00cbff 62.94%);
+      @apply text-transparent bg-clip-text;
+    }
+
+    a {
+      background: linear-gradient(90deg, #ff6c59, #a359ff);
+      @apply text-transparent bg-clip-text;
+      transition: all linear 0.6s;
+
+      &:hover {
+        background-position: center right -300px;
+        transform: scale(1.05);
+      }
+    }
   }
 
   &__controls {

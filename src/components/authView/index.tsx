@@ -41,7 +41,7 @@ const AuthView = ({ authCallback, page }: Props) => {
     <PageContainer>
       <section className={styles['form__wrapper']}>
         <h2 className={styles['form__title']}>
-          Sign {page === 'SIGN_IN' ? 'in' : 'up'} to use
+          <span>Sign {page === 'SIGN_IN' ? 'in' : 'up'} to use</span>
           <Link href={ROUTES.WELCOME}>GraphiQL App</Link>
         </h2>
 
