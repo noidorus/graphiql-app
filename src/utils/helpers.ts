@@ -12,11 +12,12 @@ export function getAuthError(e: unknown): string {
       return 'The email address is not valid.';
     case 'auth/operation-not-allowed':
       return 'Operation not allowed.';
-    case 'auth/weak-password':
-      return 'The password is too weak.';
     case 'auth/user-not-found':
       return 'User not found!';
+    case 'auth/wrong-password':
+      return 'Wrong username or password!';
     default:
+      console.log(error.code);
       return error.message;
   }
 }
