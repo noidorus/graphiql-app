@@ -84,7 +84,7 @@ const AuthView = ({ authCallback, page }: Props) => {
           <Button type="submit" text={page === 'SIGN_IN' ? 'Sign In' : 'Sign Up'} />
 
           <p>
-            Don't have an account?{' '}
+            {`Don't have an account? `}
             {page === 'SIGN_IN' ? (
               <Link href={ROUTES.SIGN_UP}>Sign Up!</Link>
             ) : (

@@ -32,10 +32,10 @@
     outline: none;
     transition: background-image 0.9s;
     box-shadow: 0px 1px 5px 0px rgb(68 65 65);
-    @apply relative w-10 h-5 bg-cover;
+    @apply relative w-10 h-5 bg-cover cursor-pointer;
 
     &:before {
-      content: '';    
+      content: '';
       background-color: #cc0100;
       border-radius: 50px;
       transition: all 0.9s;
