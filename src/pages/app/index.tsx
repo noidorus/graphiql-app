@@ -41,7 +41,7 @@ const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerS
       }
     }, 60 * 1000);
     return () => clearInterval(handle);
-  }, []);
+  }, [expTime]);
 
   return (
     <>

@@ -34,11 +34,14 @@ export default function WelcomePage() {
                 <div className={styles['welcome__developers-block']}>
                   <div className={styles['welcome__developers']}>
                     <div>
-                      <img
-                        className={styles['welcome__developers__img']}
-                        src="https://i.postimg.cc/9XppkcnP/image.jpg"
-                        alt="photo"
-                      />
+                      <picture>
+                        <img
+                          className={styles['welcome__developers__img']}
+                          src="https://i.postimg.cc/9XppkcnP/image.jpg"
+                          alt="photo"
+                        />
+                      </picture>
+
                       <p className={styles['welcome__developers__name']}>Rodion</p>
                     </div>
 
@@ -49,11 +52,14 @@ export default function WelcomePage() {
                   </div>
                   <div className={styles['welcome__developers']}>
                     <div>
-                      <img
-                        className={styles['welcome__developers__img']}
-                        src="https://i.postimg.cc/T14WXNmx/image.jpg"
-                        alt="photo"
-                      />
+                      <picture>
+                        <img
+                          className={styles['welcome__developers__img']}
+                          src="https://i.postimg.cc/T14WXNmx/image.jpg"
+                          alt="photo"
+                        />
+                      </picture>
+
                       <p className={styles['welcome__developers__name']}>Maria</p>
                     </div>
                     <p className={styles['welcome__developers__description']}>
@@ -63,11 +69,14 @@ export default function WelcomePage() {
                   </div>
                   <div className={styles['welcome__developers']}>
                     <div>
-                      <img
-                        className={styles['welcome__developers__img']}
-                        src="https://i.postimg.cc/KcD2sgb9/image.png"
-                        alt="photo"
-                      />
+                      <picture>
+                        <img
+                          className={styles['welcome__developers__img']}
+                          src="https://i.postimg.cc/KcD2sgb9/image.png"
+                          alt="photo"
+                        />
+                      </picture>
+
                       <p className={styles['welcome__developers__name']}>Anna</p>
                     </div>
                     <p className={styles['welcome__developers__description']}>
@@ -77,11 +86,13 @@ export default function WelcomePage() {
                   </div>
                 </div>
               </div>
-              <img
-                className={styles['welcome__description__img']}
-                src="/welcome-rocket.png"
-                alt="rocket"
-              />
+              <picture>
+                <img
+                  className={styles['welcome__description__img']}
+                  src="/welcome-rocket.png"
+                  alt="rocket"
+                />
+              </picture>
             </div>
           </div>
         </div>

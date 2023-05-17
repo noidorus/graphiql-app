@@ -10,7 +10,10 @@ const ErrorPage = () => {
   return (
     <PageContainer>
       <div className={styles.error}>
-        <img className={styles['error__img']} src="/error.png" alt="error" />
+        <picture>
+          <img className={styles['error__img']} src="/error.png" alt="error" />
+        </picture>
+
         <div className={styles['error__block']}>
           <h1 className={styles['error__title']}>Oops!</h1>
           <p className={styles['error__text']}>You are lost</p>

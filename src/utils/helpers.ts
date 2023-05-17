@@ -1,5 +1,3 @@
-import { UseFormSetError } from 'react-hook-form';
-
 export interface MyError {
   code: string;
   message: string;
