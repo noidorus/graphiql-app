@@ -1,13 +1,13 @@
 .form {
-  @apply flex flex-col w-96 gap-8 mt-24 text-white;
+  @apply flex flex-col max-w-md gap-8 text-white;
 
   &__wrapper {
-    @apply flex items-center justify-center gap-24 mt-16;
+    @apply flex justify-center gap-24 mt-32;
   }
 
   &__title {
     background: linear-gradient(108.92deg, #a359ff 46.18%, #00cbff 62.94%);
-    @apply flex flex-col gap-6 text-5xl text-transparent bg-clip-text text-center mb-8 pb-2;
+    @apply flex flex-col gap-6 text-5xl text-transparent bg-clip-text text-center pb-2 mt-8;
   }
 
   &__controls {
@@ -23,7 +23,7 @@
   }
 
   &__input {
-    @apply w-full  appearance-none text-xl bg-white font-semibold duration-500 outline-none;
+    @apply w-full appearance-none text-xl bg-white font-semibold duration-500 outline-none;
     @apply rounded-md border-2 border-blue-700 text-black;
 
     font-family: 'Open Sans', sans-serif;
@@ -64,5 +64,21 @@
 
   a {
     @apply text-blue-700;
+  }
+}
+
+@media (max-width: 700px) {
+  .form {
+    &__wrapper {
+      @apply flex-col items-center m-0 gap-8;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .form {
+    &__title {
+      @apply text-3xl gap-0;
+    }
   }
 }
