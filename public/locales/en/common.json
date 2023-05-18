@@ -17,7 +17,7 @@
     "btn-signin": "Sign In",
     "btn-signup": "Sign Up",
     "btn-signout": "Sign Out",
-    "btn-go-main": "Go to Main Page"
+    "btn-app-page": "App Page"
   },
   "footer": {
     "rights": "© 2023 All Rights Reserved."
