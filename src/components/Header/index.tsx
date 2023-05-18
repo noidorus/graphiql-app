@@ -1,5 +1,5 @@
+import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/router';
 import { auth } from '@/firebase/firebaseClient';
 import ROUTES from '@/constants/routes';
@@ -49,27 +49,27 @@ const Header = () => {
             <Button
               type="button"
               onClick={() => router.push(ROUTES.SIGN_IN)}
-              text={t('btn-signin')}
+              text={t('header.btn-signin')}
             />
             <Button
               type="button"
               onClick={() => router.push(ROUTES.SIGN_UP)}
-              text={t('btn-signup')}
+              text={t('header.btn-signup')}
             />
           </>
         ) : (
           <>
-            <Button type="button" onClick={handleSignOut} text={t('btn-signout')} />
+            <Button type="button" onClick={handleSignOut} text={t('header:btn-signout')} />
             <Button
               type="button"
               onClick={() => router.push(ROUTES.APP)}
-              text={t('btn-go-main')}
+              text={t('header.btn-go-main')}
             />
           </>
         )}
       </div>
     </div>
   );
-};
+}
 
 export default Header;

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 
 import styles from './styles.module.scss';
 
@@ -19,7 +19,7 @@ const Footer = () => {
         </a>
       </div>
       <div className={styles['footer__copyright']}>
-        <p>{t('Footer-rights')}</p>
+        <p>{t('footer.rights')}</p>
       </div>
       <a href="https://rs.school/react/" target="_blank">
         <img className={styles['footer__logo']} src="/rs-school.svg" alt="rs-school" />
