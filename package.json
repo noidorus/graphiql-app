@@ -21,6 +21,7 @@
     "firebase-admin": "^11.8.0",
     "i18next": "^22.4.15",
     "next": "13.3.4",
+    "next-i18next": "^13.2.2",
     "nextjs-progressbar": "^0.0.16",
     "nookies": "^2.5.2",
     "postcss": "8.4.23",
