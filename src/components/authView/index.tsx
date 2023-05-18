@@ -4,12 +4,12 @@ import Router from 'next/router';
 import Link from 'next/link';
 import { useState } from 'react';
 import { UserCredential } from 'firebase/auth';
-
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import PageContainer from '@/components/PageContainer';
 import ROUTES from '@/constants/routes';
 import Button from '@/components/Button';
 
-import resolver, { schemaType } from '@/utils/yupSchema';
 import { getAuthError } from '@/utils/helpers';
 
 import styles from './style.module.scss';
@@ -21,6 +21,21 @@ interface Props {
 
 const AuthView = ({ authCallback, page }: Props) => {
   const { t } = useTranslation();
+
+  const schema = Yup.object().shape({
+    email: Yup.string()
+      .required(t('validation.required') || '')
+      .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, t('validation.email') || ''),
+    password: Yup.string()
+      .required(t('validation.required') || '')
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#-_?&])[A-Za-z\d@$!%*#-_?&]{8,}$/,
+        t('validation.password') || ''
+      ),
+  });
+
+  const resolver = yupResolver(schema);
+  type schemaType = Yup.InferType<typeof schema>;
 
   const {
     register,
