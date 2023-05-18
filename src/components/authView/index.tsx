@@ -63,9 +63,13 @@ const AuthView = ({ authCallback, page }: Props) => {
     <PageContainer>
       <section className={styles['form__wrapper']}>
         <h2 className={styles['form__title']}>
-          {t('sign.sign')} {page === 'SIGN_IN' ? `${t('sign.in')}` : `${t('sign.up')}`}{' '}
-          {t('sign.use')}
-          <Link href={ROUTES.WELCOME}>{t('sign.GraphiQL')}</Link>
+          <span>
+            {' '}
+            {t('sign.sign')} {page === 'SIGN_IN' ? `${t('sign.in')}` : `${t('sign.up')}`}{' '}
+            {t('sign.use')}
+          </span>
+
+          <Link className={styles['form__title_link']} href={ROUTES.WELCOME}>{t('sign.GraphiQL')}</Link>
         </h2>
 
         <form className={styles['form']} onSubmit={onSubmit}>
