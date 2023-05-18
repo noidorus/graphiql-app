@@ -43,6 +43,7 @@
     "prettier": "^2.8.8",
     "react-error-boundary": "^4.0.4",
     "react-hook-form": "^7.43.9",
+    "react-spinners": "^0.13.8",
     "redux-firestore": "^2.0.0",
     "yup": "^1.1.1"
   }

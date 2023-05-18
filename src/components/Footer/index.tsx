@@ -22,7 +22,9 @@ const Footer = () => {
         <p>{t('footer.rights')}</p>
       </div>
       <a href="https://rs.school/react/" target="_blank">
-        <img className={styles['footer__logo']} src="/rs-school.svg" alt="rs-school" />
+        <picture>
+          <img className={styles['footer__logo']} src="/rs-school.svg" alt="rs-school" />
+        </picture>
       </a>
     </div>
   );

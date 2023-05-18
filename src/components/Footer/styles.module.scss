@@ -4,6 +4,10 @@
   margin: 0 auto;
   @apply flex justify-between items-center text-xl p-5;
 
+  @media (max-width: 768px) {
+    @apply flex-col gap-4;
+  }
+
   &__developers {
     @apply flex gap-4;
   }

@@ -13,7 +13,10 @@ const ErrorPage = () => {
   return (
     <PageContainer>
       <div className={styles.error}>
-        <img className={styles['error__img']} src="/error.png" alt="error" />
+        <picture>
+          <img className={styles['error__img']} src="/error.png" alt="error" />
+        </picture>
+
         <div className={styles['error__block']}>
           <h1 className={styles['error__title']}>{t('404.oops')}</h1>
           <p className={styles['error__text']}>{t('404.error')}</p>

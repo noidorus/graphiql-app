@@ -1,15 +1,15 @@
-import { useTranslation } from 'next-i18next';
-import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
 import Router from 'next/router';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
+import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { UserCredential } from 'firebase/auth';
-import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { RingLoader } from 'react-spinners';
 import PageContainer from '@/components/PageContainer';
 import ROUTES from '@/constants/routes';
 import Button from '@/components/Button';
-
 import { getAuthError } from '@/utils/helpers';
 
 import styles from './style.module.scss';
@@ -43,15 +43,19 @@ const AuthView = ({ authCallback, page }: Props) => {
     formState: { errors },
   } = useForm<schemaType>({ resolver });
   const [authError, setAuthError] = useState<string>('');
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
+    setLoading(true);
     try {
       await authCallback(email, password);
 
+      setLoading(false);
       Router.push(ROUTES.APP);
     } catch (e) {
       const err = getAuthError(e);
       setAuthError(err);
+      setLoading(false);
     }
   });
 
@@ -65,6 +69,12 @@ const AuthView = ({ authCallback, page }: Props) => {
         </h2>
 
         <form className={styles['form']} onSubmit={onSubmit}>
+          {loading ? (
+            <div className={styles['form__loading']}>
+              <RingLoader loading={loading} color={'#a359ff'} />
+            </div>
+          ) : null}
+
           {authError && <p className={styles['form__error']}>{authError}</p>}
           <div className={styles['form__controls']}>
             <div className={styles['form__item']}>
@@ -103,6 +113,7 @@ const AuthView = ({ authCallback, page }: Props) => {
           <Button
             type="submit"
             text={page === 'SIGN_IN' ? `${t('header.btn-signin')}` : `${t('header.btn-signup')}`}
+            iconProps={{ src: '/log-in.svg', alt: 'log-in icon', size: 32 }}
           />
 
           <p>
