@@ -1,0 +1,25 @@
+{
+  "welcome": {
+    "title": "Добро пожаловать в GraphiQL Приложение",
+    "subtitle": "Рады видеть Вас здесь",
+    "graphiQL": "GraphiQL - это платформа/IDE для выполнения запросов GraphQL.",
+    "rsschool": "RS School - это бесплатная образовательная программа, основанная на сообществе и проводимая сообществом разработчиков The Rolling Scopes с 2013 года.",
+    "course": "Курс по React охватывает основы, применение в реальных проектах, популярные библиотеки и инструменты, подготавливая студентов к реальным проектам на React.",
+    "team": "Наша команда",
+    "Rodion": "Родион",
+    "Rodion-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie.",
+    "Maria": "Мария",
+    "Maria-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie.",
+    "Anna": "Анна",
+    "Anna-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie."
+  },
+  "header": {
+    "btn-signin": "Войти",
+    "btn-signup": "Зарегистрироваться",
+    "btn-signout": "Выйти",
+    "btn-go-main": "Перейти на главную страницу"
+  },
+  "footer": {
+    "rights": "© 2023 Все права защищены."
+  }
+}
