@@ -2,7 +2,7 @@ import { useTranslation } from 'next-i18next';
 import PageContainer from '@/components/PageContainer';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import styles from './style.module.scss';
 
@@ -79,12 +79,8 @@ export default function WelcomePage() {
                   </div>
                 </div>
               </div>
-              <picture>
-                <img
-                  className={styles['welcome__description__img']}
-                  src="/welcome-rocket.png"
-                  alt="rocket"
-                />
+              <picture className={styles['welcome__description__img']}>
+                <img src="/welcome-rocket.png" alt="rocket" />
               </picture>
             </div>
           </div>

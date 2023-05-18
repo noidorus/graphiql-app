@@ -1,29 +1,4 @@
 .language-switcher {
-    -webkit-appearance: none;
-    appearance: none;
-    background-image: url(https://i.postimg.cc/mrRKDbbT/flag-en-big.jpg);
-    border-radius: 50px;
-    outline: none;
-    transition: background-image 0.9s;
-    box-shadow: 0px 1px 5px 0px rgb(68 65 65);
-    @apply relative w-10 h-5 bg-cover;
-
-    &:before {
-      content: '';    
-      background-color: #cc0100;
-      border-radius: 50px;
-      transition: all 0.9s;
-      @apply absolute top-0 left-0 h-5 w-5;
-    }
-
-    &:checked {
-      background-image: url(https://i.postimg.cc/zGW1vtKF/image.png);
-      transition: background-image 0.9s;
-    }
-
-    &:checked:before {
-      transform: translate(100%);
-      transition: all 0.9s;
-      background-color: #051c79;
-    }
-  }
+  width: 35px;
+  height: 35px;
+}
