@@ -21,5 +21,28 @@
   },
   "footer": {
     "rights": "© 2023 All Rights Reserved."
+  },
+  "validation": {
+    "required": "Required field!",
+    "email": "Write correct email!",
+    "password": "Min 8 symbols, one letter, one digit, one special character!"
+  },
+  "404": {
+    "oops": "Oops!",
+    "error": "You are lost"
+  },
+  "sign": {
+    "sign": "Sign",
+    "in": "in",
+    "up": "up",
+    "use": "to use",
+    "GraphiQL": "GraphiQL App",
+    "email": "Email",
+    "password": "Password",
+    "account-false": "Don't have an account? ",
+    "account-true": "Already have an account? ",
+    "placeholder-email": "Enter your email",
+    "placeholder-password": "Enter your password",
+    "required": "Required field!"
   }
 }

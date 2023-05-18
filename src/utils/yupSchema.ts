@@ -4,13 +4,13 @@ import i18n from 'i18next';
 
 const schema = Yup.object().shape({
   email: Yup.string()
-    .required(i18n.t('validation-required') || '')
-    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, i18n.t('validation-email') || ''),
+    .required(i18n.t('validation.required') || '')
+    .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, i18n.t('validation.email') || ''),
   password: Yup.string()
-    .required(i18n.t('validation-required') || '')
+    .required(i18n.t('validation.required') || '')
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#-_?&])[A-Za-z\d@$!%*#-_?&]{8,}$/,
-      i18n.t('validation-password') || ''
+      i18n.t('validation.password') || ''
     ),
 });
 

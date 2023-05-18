@@ -1,5 +1,6 @@
 import nookies from 'nookies';
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import Header from '@/components/Header';
 import PageContainer from '@/components/PageContainer';
@@ -12,8 +13,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
     const { uid } = token;
 
+    const locale = ctx.locale || 'en';
+
     return {
-      props: { uid },
+      props: { uid, ...(await serverSideTranslations(locale, ['common'])) },
     };
   } catch (err) {
     return {

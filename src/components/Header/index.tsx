@@ -59,7 +59,7 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Button type="button" onClick={handleSignOut} text={t('header:btn-signout')} />
+            <Button type="button" onClick={handleSignOut} text={t('header.btn-signout')} />
             <Button
               type="button"
               onClick={() => router.push(ROUTES.APP)}

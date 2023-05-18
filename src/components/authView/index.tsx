@@ -1,5 +1,5 @@
+import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import Router from 'next/router';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -44,8 +44,9 @@ const AuthView = ({ authCallback, page }: Props) => {
     <PageContainer>
       <section className={styles['form__wrapper']}>
         <h2 className={styles['form__title']}>
-          {t('sign')} {page === 'SIGN_IN' ? `${t('sign-in')}` : `${t('sign-up')}`} {t('sign-use')}
-          <Link href={ROUTES.WELCOME}>{t('sign-GraphiQL')}</Link>
+          {t('sign.sign')} {page === 'SIGN_IN' ? `${t('sign.in')}` : `${t('sign.up')}`}{' '}
+          {t('sign.use')}
+          <Link href={ROUTES.WELCOME}>{t('sign.GraphiQL')}</Link>
         </h2>
 
         <form className={styles['form']} onSubmit={onSubmit}>
@@ -57,10 +58,10 @@ const AuthView = ({ authCallback, page }: Props) => {
                 id="email"
                 type="text"
                 {...register('email')}
-                placeholder={t('sign-placeholder-email') || ''}
+                placeholder={t('sign.placeholder-email') || ''}
               />
               <label className={styles['form__label']} htmlFor="email">
-                {t('sign-email')}
+                {t('sign.email')}
               </label>
               {errors.email?.message && (
                 <p className={styles['form__error']}>{errors.email?.message}</p>
@@ -73,10 +74,10 @@ const AuthView = ({ authCallback, page }: Props) => {
                 id="password"
                 type="password"
                 {...register('password')}
-                placeholder={t('sign-placeholder-password') || ''}
+                placeholder={t('sign.placeholder-password') || ''}
               />
               <label className={styles['form__label']} htmlFor="password">
-                {t('sign-password')}
+                {t('sign.password')}
               </label>
               {errors.password?.message && (
                 <p className={styles['form__error']}>{errors.password?.message}</p>
@@ -86,25 +87,19 @@ const AuthView = ({ authCallback, page }: Props) => {
 
           <Button
             type="submit"
-            text={
-              page === 'SIGN_IN' ? `${t('btn-signin')}` : `${t('btn-signup')}`
-            }
+            text={page === 'SIGN_IN' ? `${t('header.btn-signin')}` : `${t('header.btn-signup')}`}
           />
 
           <p>
             {page === 'SIGN_IN' ? (
               <>
-                {t('sign-account-false')}
-                <Link href={ROUTES.SIGN_UP}>
-                  {t('btn-signup')}!
-                </Link>
+                {t('sign.account-false')}
+                <Link href={ROUTES.SIGN_UP}>{t('header.btn-signup')}!</Link>
               </>
             ) : (
               <>
-                {t('sign-account-true')}
-                <Link href={ROUTES.SIGN_IN}>
-                  {t('btn-signin')}!
-                </Link>
+                {t('sign.account-true')}
+                <Link href={ROUTES.SIGN_IN}>{t('header.btn-signin')}!</Link>
               </>
             )}
           </p>
