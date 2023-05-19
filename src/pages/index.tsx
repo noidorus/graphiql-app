@@ -1,10 +1,15 @@
+import { useTranslation } from 'next-i18next';
 import PageContainer from '@/components/PageContainer';
 import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps, GetStaticPropsContext } from 'next';
 
 import styles from './style.module.scss';
-import Header from '@/components/Header';
 
 export default function WelcomePage() {
+  const { t } = useTranslation();
+
   return (
     <>
       <Header />
@@ -12,25 +17,17 @@ export default function WelcomePage() {
         <div className={styles.welcome}>
           <div className={styles['welcome__wrapper']}>
             <div className={styles['welcome__title-block']}>
-              <h1 className={styles['welcome__title']}>Welcome to the GraphiQL App</h1>
-              <p className={styles['welcome__subtitle']}>Good to see you here</p>
+              <h1 className={styles['welcome__title']}>{t('welcome.title')}</h1>
+              <p className={styles['welcome__subtitle']}>{t('welcome.subtitle')}</p>
             </div>
             <div className={styles['welcome__description-block']}>
               <div className={styles['welcome__description__text']}>
                 <div className={styles['welcome__text-block']}>
-                  <p className={styles['welcome__text']}>
-                    GraphiQL is a playground/IDE for graphQL requests.
-                  </p>
-                  <p className={styles['welcome__text']}>
-                    RS School is free-of-charge and community-based education program conducted by
-                    The Rolling Scopes developer community since 2013.
-                  </p>
-                  <p className={styles['welcome__text']}>
-                    React course covers fundamentals, real-world applications, popular libraries and
-                    tools, preparing students for real React projects.
-                  </p>
+                  <p className={styles['welcome__text']}>{t('welcome.graphiQL')}</p>
+                  <p className={styles['welcome__text']}>{t('welcome.rsschool')}</p>
+                  <p className={styles['welcome__text']}>{t('welcome.course')}</p>
                 </div>
-                <p className={styles['welcome__developers__title']}>Our team</p>
+                <p className={styles['welcome__developers__title']}>{t('welcome.team')}</p>
                 <div className={styles['welcome__developers-block']}>
                   <div className={styles['welcome__developers']}>
                     <div>
@@ -42,12 +39,11 @@ export default function WelcomePage() {
                         />
                       </picture>
 
-                      <p className={styles['welcome__developers__name']}>Rodion</p>
+                      <p className={styles['welcome__developers__name']}>{t('welcome.Rodion')}</p>
                     </div>
 
                     <p className={styles['welcome__developers__description']}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel
-                      velit commodo molestie.
+                      {t('welcome.Rodion-description')}
                     </p>
                   </div>
                   <div className={styles['welcome__developers']}>
@@ -60,11 +56,10 @@ export default function WelcomePage() {
                         />
                       </picture>
 
-                      <p className={styles['welcome__developers__name']}>Maria</p>
+                      <p className={styles['welcome__developers__name']}>{t('welcome.Maria')}</p>
                     </div>
                     <p className={styles['welcome__developers__description']}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel
-                      velit commodo molestie.
+                      {t('welcome.Maria-description')}
                     </p>
                   </div>
                   <div className={styles['welcome__developers']}>
@@ -77,21 +72,16 @@ export default function WelcomePage() {
                         />
                       </picture>
 
-                      <p className={styles['welcome__developers__name']}>Anna</p>
+                      <p className={styles['welcome__developers__name']}>{t('welcome.Anna')}</p>
                     </div>
                     <p className={styles['welcome__developers__description']}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel
-                      velit commodo molestie.
+                      {t('welcome.Anna-description')}
                     </p>
                   </div>
                 </div>
               </div>
-              <picture>
-                <img
-                  className={styles['welcome__description__img']}
-                  src="/welcome-rocket.png"
-                  alt="rocket"
-                />
+              <picture className={styles['welcome__description__img']}>
+                <img src="/welcome-rocket.png" alt="rocket" />
               </picture>
             </div>
           </div>
@@ -101,3 +91,14 @@ export default function WelcomePage() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const { locale } = context;
+  const currentLocale = locale || 'defaultLocale';
+
+  return {
+    props: {
+      ...(await serverSideTranslations(currentLocale, ['common'])),
+    },
+  };
+};

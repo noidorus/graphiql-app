@@ -1,15 +1,15 @@
+import * as Yup from 'yup';
 import Router from 'next/router';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import { UserCredential } from 'firebase/auth';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { RingLoader } from 'react-spinners';
-
 import PageContainer from '@/components/PageContainer';
 import ROUTES from '@/constants/routes';
 import Button from '@/components/Button';
-
-import resolver, { schemaType } from '@/utils/yupSchema';
 import { getAuthError } from '@/utils/helpers';
 
 import styles from './style.module.scss';
@@ -20,6 +20,23 @@ interface Props {
 }
 
 const AuthView = ({ authCallback, page }: Props) => {
+  const { t } = useTranslation();
+
+  const schema = Yup.object().shape({
+    email: Yup.string()
+      .required(t('validation.required') || '')
+      .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, t('validation.email') || ''),
+    password: Yup.string()
+      .required(t('validation.required') || '')
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#-_?&])[A-Za-z\d@$!%*#-_?&]{8,}$/,
+        t('validation.password') || ''
+      ),
+  });
+
+  const resolver = yupResolver(schema);
+  type schemaType = Yup.InferType<typeof schema>;
+
   const {
     register,
     handleSubmit,
@@ -46,8 +63,13 @@ const AuthView = ({ authCallback, page }: Props) => {
     <PageContainer>
       <section className={styles['form__wrapper']}>
         <h2 className={styles['form__title']}>
-          <span>Sign {page === 'SIGN_IN' ? 'in' : 'up'} to use</span>
-          <Link href={ROUTES.WELCOME}>GraphiQL App</Link>
+          <span>
+            {' '}
+            {t('sign.sign')} {page === 'SIGN_IN' ? `${t('sign.in')}` : `${t('sign.up')}`}{' '}
+            {t('sign.use')}
+          </span>
+
+          <Link className={styles['form__title_link']} href={ROUTES.WELCOME}>{t('sign.GraphiQL')}</Link>
         </h2>
 
         <form className={styles['form']} onSubmit={onSubmit}>
@@ -65,10 +87,10 @@ const AuthView = ({ authCallback, page }: Props) => {
                 id="email"
                 type="text"
                 {...register('email')}
-                placeholder="Enter your email"
+                placeholder={t('sign.placeholder-email') || ''}
               />
               <label className={styles['form__label']} htmlFor="email">
-                Email
+                {t('sign.email')}
               </label>
               {errors.email?.message && (
                 <p className={styles['form__error']}>{errors.email?.message}</p>
@@ -81,10 +103,10 @@ const AuthView = ({ authCallback, page }: Props) => {
                 id="password"
                 type="password"
                 {...register('password')}
-                placeholder="Enter your password"
+                placeholder={t('sign.placeholder-password') || ''}
               />
               <label className={styles['form__label']} htmlFor="password">
-                Password
+                {t('sign.password')}
               </label>
               {errors.password?.message && (
                 <p className={styles['form__error']}>{errors.password?.message}</p>
@@ -94,16 +116,21 @@ const AuthView = ({ authCallback, page }: Props) => {
 
           <Button
             type="submit"
-            text={page === 'SIGN_IN' ? 'Sign In' : 'Sign Up'}
+            text={page === 'SIGN_IN' ? `${t('header.btn-signin')}` : `${t('header.btn-signup')}`}
             iconProps={{ src: '/log-in.svg', alt: 'log-in icon', size: 32 }}
           />
 
           <p>
-            {`Don't have an account? `}
             {page === 'SIGN_IN' ? (
-              <Link href={ROUTES.SIGN_UP}>Sign Up!</Link>
+              <>
+                {t('sign.account-false')}
+                <Link href={ROUTES.SIGN_UP}>{t('header.btn-signup')}!</Link>
+              </>
             ) : (
-              <Link href={ROUTES.SIGN_IN}>Sign In!</Link>
+              <>
+                {t('sign.account-true')}
+                <Link href={ROUTES.SIGN_IN}>{t('header.btn-signin')}!</Link>
+              </>
             )}
           </p>
         </form>
