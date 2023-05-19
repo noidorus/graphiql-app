@@ -29,7 +29,8 @@
   },
   "404": {
     "oops": "Oops!",
-    "error": "You are lost"
+    "error": "You are lost",
+    "btn-go-home": "Go Home"
   },
   "sign": {
     "sign": "Sign",

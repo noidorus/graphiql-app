@@ -3,6 +3,7 @@ import PageContainer from '@/components/PageContainer';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps, GetStaticPropsContext } from 'next';
 
 import styles from './style.module.scss';
 
@@ -38,7 +39,7 @@ export default function WelcomePage() {
                         />
                       </picture>
 
-                      <p className={styles['welcome__developers__name']}>Rodion</p>
+                      <p className={styles['welcome__developers__name']}>{t('welcome.Rodion')}</p>
                     </div>
 
                     <p className={styles['welcome__developers__description']}>
@@ -55,7 +56,7 @@ export default function WelcomePage() {
                         />
                       </picture>
 
-                      <p className={styles['welcome__developers__name']}>Maria</p>
+                      <p className={styles['welcome__developers__name']}>{t('welcome.Maria')}</p>
                     </div>
                     <p className={styles['welcome__developers__description']}>
                       {t('welcome.Maria-description')}
@@ -71,7 +72,7 @@ export default function WelcomePage() {
                         />
                       </picture>
 
-                      <p className={styles['welcome__developers__name']}>Anna</p>
+                      <p className={styles['welcome__developers__name']}>{t('welcome.Anna')}</p>
                     </div>
                     <p className={styles['welcome__developers__description']}>
                       {t('welcome.Anna-description')}
@@ -91,11 +92,13 @@ export default function WelcomePage() {
   );
 }
 
-// @ts-ignore
-export async function getStaticProps({ locale }) {
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const { locale } = context;
+  const currentLocale = locale || 'defaultLocale';
+
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common'])),
+      ...(await serverSideTranslations(currentLocale, ['common'])),
     },
   };
-}
+};

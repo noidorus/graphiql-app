@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 import Button from '@/components/Button';
 import PageContainer from '@/components/PageContainer';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { GetStaticProps, GetStaticPropsContext } from 'next';
 
 import styles from './404.module.scss';
 
@@ -13,14 +14,19 @@ const ErrorPage = () => {
   return (
     <PageContainer>
       <div className={styles.error}>
-        <picture>
-          <img className={styles['error__img']} src="/error.png" alt="error" />
+        <picture className={styles['error__img']}>
+          <img src="/error.png" alt="error" />
         </picture>
 
         <div className={styles['error__block']}>
           <h1 className={styles['error__title']}>{t('404.oops')}</h1>
           <p className={styles['error__text']}>{t('404.error')}</p>
-          <Button type="button" onClick={() => router.push('/')} text={'Go Home'} />
+          <Button
+            type="button"
+            onClick={() => router.push('/')}
+            text={t('404.btn-go-home')}
+            iconProps={{ src: '/home.svg', alt: 'home icon', size: 24 }}
+          />
         </div>
       </div>
     </PageContainer>
@@ -29,11 +35,13 @@ const ErrorPage = () => {
 
 export default ErrorPage;
 
-// @ts-ignore
-export async function getStaticProps({ locale }) {
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
+  const { locale } = context;
+  const currentLocale = locale || 'defaultLocale';
+
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common'])),
+      ...(await serverSideTranslations(currentLocale, ['common'])),
     },
   };
-}
+};
