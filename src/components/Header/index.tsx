@@ -62,7 +62,7 @@ const Header = () => {
             text={`${t('header.btn-signin')} / ${t('header.btn-signup')}`}
             iconProps={{ src: '/log-in.svg', alt: 'log-in icon', size: 32 }}
           />
-        ) : (
+        ) : user && user && router.pathname !== ROUTES.APP ? (
           <>
             <Button
               type="button"
@@ -77,6 +77,13 @@ const Header = () => {
               iconProps={{ src: '/home.svg', alt: 'home icon', size: 24 }}
             />
           </>
+        ) : (
+          <Button
+            type="button"
+            onClick={handleSignOut}
+            text={t('header.btn-signout')}
+            iconProps={{ src: '/log-out.svg', alt: 'log-out icon', size: 24 }}
+          />
         )}
       </div>
     </div>
