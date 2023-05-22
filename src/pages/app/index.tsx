@@ -3,6 +3,7 @@ import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect } from 'react';
 import Router from 'next/router';
+import Documentation from '@/components/Documentation';
 
 import Header from '@/components/Header';
 import PageContainer from '@/components/PageContainer';
@@ -52,11 +53,7 @@ const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerS
       <PageContainer>
         <div className={styles.app}>
           <div className={styles['app__sidebar']}>
-            <button className={styles.app__sidebar_docs}>
-              <picture>
-                <img className={styles['app__sidebar__img']} src="/docs.png" alt="docs" />
-              </picture>
-            </button>
+            <Documentation></Documentation>
             <button className={styles.app__sidebar_refetch}>
               <picture>
                 <img className={styles['app__sidebar__img']} src="/refetch.svg" alt="docs" />

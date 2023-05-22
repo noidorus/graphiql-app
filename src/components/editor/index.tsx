@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-
+import { DEFAULT_REQUEST } from '@/constants/apiBase';
 import styles from './style.module.scss';
 
 const MIN_BLOCK_WIDTH = 280;
@@ -20,6 +20,8 @@ const Editor = () => {
   };
 
   useEffect(() => {
+
+
     const handleMouseMove = (event: MouseEvent) => {
       if (isDragging) {
         const dragBarWidth = dragBarRef.current?.offsetWidth ?? 0;
@@ -59,7 +61,7 @@ const Editor = () => {
     <div className={styles.block} ref={containerRef}>
       <div className={styles.editors} style={{ minWidth: MIN_BLOCK_WIDTH, width: editorsWidth }}>
         <div className={styles['editors__editor-block']}>
-          <div className={styles['editors__editor']}>editor </div>
+          <textarea className={styles['editors__editor']} defaultValue={DEFAULT_REQUEST}></textarea>
           <div className={styles['editors__editor-toolbar']}>
             <button className={styles['editors__editor-button_start']}>
               <img src="/play.png" alt="start" />
