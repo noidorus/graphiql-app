@@ -19,7 +19,7 @@
       @apply text-transparent bg-clip-text;
     }
 
-    a {
+    &_link {
       background: linear-gradient(90deg, #ff6c59, #a359ff);
       @apply text-transparent bg-clip-text;
       transition: all linear 0.6s;

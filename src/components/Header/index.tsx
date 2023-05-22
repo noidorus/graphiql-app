@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -6,14 +7,16 @@ import Image from 'next/image';
 import { auth } from '@/firebase/firebaseClient';
 import ROUTES from '@/constants/routes';
 import { useAuth } from '../authProvider';
-
 import Button from '../Button';
+import LanguageSwitcher from '../languageSwitcher';
+
 import styles from './styles.module.scss';
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
   const router = useRouter();
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -51,29 +54,36 @@ const Header = () => {
         />
       </Link>
       <div className={styles['header__btns']}>
-        <input className={styles['header__theme']} type="checkbox" />
+        <LanguageSwitcher />
         {!user ? (
           <Button
             type="button"
             onClick={() => router.push(ROUTES.SIGN_IN)}
-            text={'Sign In'}
+            text={`${t('header.btn-signin')} / ${t('header.btn-signup')}`}
             iconProps={{ src: '/log-in.svg', alt: 'log-in icon', size: 32 }}
           />
-        ) : (
+        ) : user && user && router.pathname !== ROUTES.APP ? (
           <>
             <Button
               type="button"
               onClick={handleSignOut}
-              text={'Sign Out'}
+              text={t('header.btn-signout')}
               iconProps={{ src: '/log-out.svg', alt: 'log-out icon', size: 24 }}
             />
             <Button
               type="button"
               onClick={() => router.push(ROUTES.APP)}
-              text={'App Page'}
+              text={t('header.btn-app-page')}
               iconProps={{ src: '/home.svg', alt: 'home icon', size: 24 }}
             />
           </>
+        ) : (
+          <Button
+            type="button"
+            onClick={handleSignOut}
+            text={t('header.btn-signout')}
+            iconProps={{ src: '/log-out.svg', alt: 'log-out icon', size: 24 }}
+          />
         )}
       </div>
     </div>

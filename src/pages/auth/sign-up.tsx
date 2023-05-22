@@ -6,18 +6,7 @@ import { registerWithEmailAndPassword } from '@/firebase/firebaseClient';
 import { firebaseAdmin } from '@/firebase/firebaseAdmin';
 import ROUTES from '@/constants/routes';
 import AuthView from '@/components/authView';
-
-export default function SignUp() {
-  const onSignUp = async (email: string, password: string) => {
-    return await registerWithEmailAndPassword(email, password);
-  };
-
-  return (
-    <ErrorBoundary fallback={<div>Something went wrong...</div>}>
-      <AuthView authCallback={onSignUp} page="SIGN_UP" />
-    </ErrorBoundary>
-  );
-}
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
@@ -30,11 +19,31 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         permanent: false,
         destination: ROUTES.APP,
       },
-      props: { uid },
+      props: {
+        uid,
+      },
     };
   } catch (err) {
+    const locale = ctx.locale || 'en';
+
     return {
-      props: {} as never,
+      props: {
+        ...(await serverSideTranslations(locale, ['common'])),
+      },
     };
   }
 };
+
+const SignUp = () => {
+  const onSignUp = async (email: string, password: string) => {
+    return await registerWithEmailAndPassword(email, password);
+  };
+
+  return (
+    <ErrorBoundary fallback={<div>Something went wrong...</div>}>
+      <AuthView authCallback={onSignUp} page="SIGN_UP" />
+    </ErrorBoundary>
+  );
+};
+
+export default SignUp;

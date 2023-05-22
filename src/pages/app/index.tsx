@@ -1,5 +1,6 @@
 import nookies from 'nookies';
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect } from 'react';
 import Router from 'next/router';
 import Documentation from '@/components/Documentation';
@@ -19,8 +20,10 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
     const { uid, exp } = token;
 
+    const locale = ctx.locale || 'en';
+
     return {
-      props: { uid, exp },
+      props: { uid, exp, ...(await serverSideTranslations(locale, ['common'])) },
     };
   } catch (err) {
     return {
@@ -52,7 +55,9 @@ const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerS
           <div className={styles['app__sidebar']}>
             <Documentation></Documentation>
             <button className={styles.app__sidebar_refetch}>
-              <img className={styles['app__sidebar__img']} src="/refetch.svg" alt="docs" />
+              <picture>
+                <img className={styles['app__sidebar__img']} src="/refetch.svg" alt="docs" />
+              </picture>
             </button>
           </div>
           <Editor />
