@@ -1,4 +1,5 @@
 export const API_URL = 'https://spacex-production.up.railway.app/';
+export const MAIN_ELEMENT = 'Query';
 export const SCHEMA_REQUEST = `query IntrospectionQuery {
   __schema {
     queryType {
