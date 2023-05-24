@@ -13,7 +13,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
     const { uid } = token;
 
-
     return {
       redirect: {
         permanent: false,

@@ -61,6 +61,7 @@ const Header = () => {
             onClick={() => router.push(ROUTES.SIGN_IN)}
             text={`${t('header.btn-signin')} / ${t('header.btn-signup')}`}
             iconProps={{ src: '/log-in.svg', alt: 'log-in icon', size: 32 }}
+            testId="login-btn"
           />
         ) : user && user && router.pathname !== ROUTES.APP ? (
           <>

@@ -69,7 +69,13 @@ const AuthView = ({ authCallback, page }: Props) => {
             {t('sign.use')}
           </span>
 
-          <Link className={styles['form__title_link']} href={ROUTES.WELCOME}>{t('sign.GraphiQL')}</Link>
+          <Link
+            className={styles['form__title_link']}
+            href={ROUTES.WELCOME}
+            data-testid="welcome-link"
+          >
+            {t('sign.GraphiQL')}
+          </Link>
         </h2>
 
         <form className={styles['form']} onSubmit={onSubmit}>
@@ -79,7 +85,11 @@ const AuthView = ({ authCallback, page }: Props) => {
             </div>
           ) : null}
 
-          {authError && <p className={styles['form__error']}>{authError}</p>}
+          {authError && (
+            <p className={styles['form__error']} data-testid="auth-error">
+              {authError}
+            </p>
+          )}
           <div className={styles['form__controls']}>
             <div className={styles['form__item']}>
               <input
@@ -93,7 +103,9 @@ const AuthView = ({ authCallback, page }: Props) => {
                 {t('sign.email')}
               </label>
               {errors.email?.message && (
-                <p className={styles['form__error']}>{errors.email?.message}</p>
+                <p className={styles['form__error']} data-testid="auth-error">
+                  {errors.email?.message}
+                </p>
               )}
             </div>
 
@@ -109,7 +121,9 @@ const AuthView = ({ authCallback, page }: Props) => {
                 {t('sign.password')}
               </label>
               {errors.password?.message && (
-                <p className={styles['form__error']}>{errors.password?.message}</p>
+                <p className={styles['form__error']} data-testid="auth-error">
+                  {errors.password?.message}
+                </p>
               )}
             </div>
           </div>
@@ -118,18 +132,23 @@ const AuthView = ({ authCallback, page }: Props) => {
             type="submit"
             text={page === 'SIGN_IN' ? `${t('header.btn-signin')}` : `${t('header.btn-signup')}`}
             iconProps={{ src: '/log-in.svg', alt: 'log-in icon', size: 32 }}
+            testId="auth-btn"
           />
 
           <p>
             {page === 'SIGN_IN' ? (
               <>
                 {t('sign.account-false')}
-                <Link href={ROUTES.SIGN_UP}>{t('header.btn-signup')}!</Link>
+                <Link data-testid="login-link" href={ROUTES.SIGN_UP}>
+                  {t('header.btn-signup')}!
+                </Link>
               </>
             ) : (
               <>
                 {t('sign.account-true')}
-                <Link href={ROUTES.SIGN_IN}>{t('header.btn-signin')}!</Link>
+                <Link data-testid="login-link" href={ROUTES.SIGN_IN}>
+                  {t('header.btn-signin')}!
+                </Link>
               </>
             )}
           </p>
