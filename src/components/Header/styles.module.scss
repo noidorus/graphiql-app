@@ -1,6 +1,6 @@
 .header {
   transition: background-color 0.5s ease, height 0.5s ease;
-  @apply flex justify-between items-center sticky top-0 p-5 h-20 bg-black;
+  @apply flex justify-between items-center sticky top-0 p-5 h-20 bg-black z-10;
   @apply max-w-1440 mx-auto my-0;
 
   &_sticky {
