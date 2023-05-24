@@ -6,6 +6,8 @@ import { Type } from './types';
 
 import styles from './style.module.scss';
 
+import { RingLoader } from 'react-spinners';
+
 const Documentation = () => {
   const [sdlSchema, setSdlSchema] = useState<boolean>(false);
   const [currentType, setThisType] = useState<Type|null>(null);
@@ -56,7 +58,7 @@ const Documentation = () => {
         <img className={styles['app__sidebar__img']} src="/docs.png" alt="docs" />
       </button>
     )}
-    {!sdlSchema && (<button className={styles.app__sidebar_docs}> </button>)}
+    {!sdlSchema && (<RingLoader loading={true} color={'#a359ff'} />)}
     {openDoc && currentType &&  (<div className={styles.doc_wrapper}>
       <SdlPart thisType={currentType} goNext={goNext} goPrevious={goPrevious} previous={previous} />
     </div>)}
