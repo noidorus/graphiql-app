@@ -1,10 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, SyntheticEvent } from 'react';
 import { DEFAULT_REQUEST } from '@/constants/apiBase';
 import styles from './style.module.scss';
 import CodeMirror, { basicSetup } from '@uiw/react-codemirror';
 import { graphql } from 'cm6-graphql';
 import { buildSchema } from "graphql";
+import { RingLoader } from 'react-spinners';
 import SCHEMA from '@/constants/Schema';
+import { fetchSchema } from './apiProvider';
 
 const MIN_BLOCK_WIDTH = 280;
 
@@ -12,6 +14,9 @@ const Editor = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [editorsWidth, setEditorsWidth] = useState<string>('50%');
   const [responseWidth, setResponseWidth] = useState<string>('50%');
+  const [editorValue, setEditorValue] = useState<string>(DEFAULT_REQUEST);
+  const [responseValue, setResponseValue] = useState<string>('');
+  const [loaded, setLoader] = useState(false);
   const dragBarRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -65,9 +70,15 @@ const Editor = () => {
 
 
   const onChange = React.useCallback((value:string) => {
-    console.log('value:', value);
+    setEditorValue(value);
   }, []);
 
+  const sendRequest = async (event: SyntheticEvent) => {
+    setLoader(true);
+    const response = await fetchSchema(editorValue);
+    setResponseValue(JSON.stringify(response, null, 2));
+    setLoader(false);
+  }
 
   const currentExtensions = basicSetup();
   currentExtensions.push(graphql(schema));
@@ -84,7 +95,8 @@ const Editor = () => {
     />
           <div className={styles['editors__editor-toolbar']}>
             <button className={styles['editors__editor-button_start']}>
-              <img src="/play.png" alt="start" />
+            {loaded && (<RingLoader loading={true} color={'#a359ff'} />)}
+            {!loaded && (<img src="/play.png" alt="start" onClick={sendRequest} />)}
             </button>
           </div>
         </div>
@@ -96,8 +108,9 @@ const Editor = () => {
         <div className={styles['editors__editor-tool']}>1.</div>
       </div>
       <div className={styles.dragbar} ref={dragBarRef} onMouseDown={handleMouseDown}></div>
-      <div className={styles.response} style={{ width: responseWidth }}>
-        response
+      <div className={styles.response} style={{ width: responseWidth }}><pre>
+        {responseValue}
+        </pre>
       </div>
     </div>
   );

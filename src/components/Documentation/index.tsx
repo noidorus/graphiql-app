@@ -10,19 +10,22 @@ import { RingLoader } from 'react-spinners';
 
 const Documentation = () => {
   const [sdlSchema, setSdlSchema] = useState<boolean>(false);
-  const [currentType, setThisType] = useState<Type|null>(null);
+  const [currentType, setThisType] = useState<Type | null>(null);
   const [allTypes, setAllTypes] = useState<Type[]>([]);
   const [openDoc, setOpenDoc] = useState<boolean>(false);
   const [previous, setPrevious] = useState<string>('');
 
   useEffect(() => {
     async function fetchData() {
+      console.log('do');
       const originalSchema = await fetchSchema(SCHEMA_REQUEST);
       schemaParsing(originalSchema);
       setSdlSchema(true);
     }
-    fetchData();
-  }, []);
+    if (!sdlSchema) {
+      fetchData();
+    }
+  }, [sdlSchema]);
 
   const changeStat = () => {
     const firstElement = getTypeByName(MAIN_ELEMENT);
@@ -30,25 +33,22 @@ const Documentation = () => {
     setOpenDoc(!openDoc);
   }
 
-  const getTypeByName = (name:string): Type | null => {
-    console.log(`(${name})`);
-    let result = allTypes.filter((data:Type) => data.name === name);
-    console.log(result);
+  const getTypeByName = (name: string): Type | null => {
+    let result = allTypes.filter((data: Type) => data.name === name);
     return result.length === 1 ? result[0] : null;
   }
 
 
-  const schemaParsing = (originalSchema:any) => {
-    const schemaType = originalSchema['data']['__schema']['types'].map((data:Type) => data);
-    console.log(schemaType);
+  const schemaParsing = (originalSchema: any) => {
+    const schemaType = originalSchema['data']['__schema']['types'].map((data: Type) => data);
     setAllTypes(schemaType);
-  } 
+  }
 
   const goPrevious = () => {
     setThisType(getTypeByName(previous));
   }
 
-  const goNext = (name:string) => {
+  const goNext = (name: string) => {
     setThisType(getTypeByName(name));
   }
 
@@ -59,7 +59,7 @@ const Documentation = () => {
       </button>
     )}
     {!sdlSchema && (<RingLoader loading={true} color={'#a359ff'} />)}
-    {openDoc && currentType &&  (<div className={styles.doc_wrapper}>
+    {openDoc && currentType && (<div className={styles.doc_wrapper}>
       <SdlPart thisType={currentType} goNext={goNext} goPrevious={goPrevious} previous={previous} />
     </div>)}
   </>);
