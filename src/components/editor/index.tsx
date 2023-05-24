@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { DEFAULT_REQUEST } from '@/constants/apiBase';
 import styles from './style.module.scss';
+import CodeMirror, { basicSetup } from '@uiw/react-codemirror';
+import { graphql } from 'cm6-graphql';
+import { buildSchema } from "graphql";
+import SCHEMA from '@/constants/Schema';
 
 const MIN_BLOCK_WIDTH = 280;
 
@@ -18,6 +22,8 @@ const Editor = () => {
   const handleMouseUp = (event: MouseEvent) => {
     setIsDragging(false);
   };
+
+  const schema = buildSchema(SCHEMA);
 
   useEffect(() => {
 
@@ -57,11 +63,25 @@ const Editor = () => {
     };
   }, [isDragging]);
 
+
+  const onChange = React.useCallback((value:string) => {
+    console.log('value:', value);
+  }, []);
+
+
+  const currentExtensions = basicSetup();
+  currentExtensions.push(graphql(schema));
+
   return (
     <div className={styles.block} ref={containerRef}>
       <div className={styles.editors} style={{ minWidth: MIN_BLOCK_WIDTH, width: editorsWidth }}>
         <div className={styles['editors__editor-block']}>
-          <textarea className={styles['editors__editor']} defaultValue={DEFAULT_REQUEST}></textarea>
+        <CodeMirror
+      value={DEFAULT_REQUEST}
+      className={styles['editors__editor']}
+      extensions={ currentExtensions }
+      onChange={onChange}
+    />
           <div className={styles['editors__editor-toolbar']}>
             <button className={styles['editors__editor-button_start']}>
               <img src="/play.png" alt="start" />
