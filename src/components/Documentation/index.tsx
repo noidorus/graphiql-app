@@ -6,18 +6,17 @@ import { Type } from './types';
 
 import styles from './style.module.scss';
 
-import { RingLoader } from 'react-spinners';
+import { ClipLoader } from 'react-spinners';
 
 const Documentation = () => {
   const [sdlSchema, setSdlSchema] = useState<boolean>(false);
   const [currentType, setThisType] = useState<Type | null>(null);
   const [allTypes, setAllTypes] = useState<Type[]>([]);
   const [openDoc, setOpenDoc] = useState<boolean>(false);
-  const [previous, setPrevious] = useState<string>('');
+  const [previous, setPrevious] = useState<string[]>([]);
 
   useEffect(() => {
     async function fetchData() {
-      console.log('do');
       const originalSchema = await fetchSchema(SCHEMA_REQUEST);
       schemaParsing(originalSchema);
       setSdlSchema(true);
@@ -45,10 +44,17 @@ const Documentation = () => {
   }
 
   const goPrevious = () => {
-    setThisType(getTypeByName(previous));
+    if (previous.length > 0) {
+      const currentPrev = previous.pop();
+      setPrevious(previous => previous);
+      if (currentPrev) {
+        setThisType(getTypeByName(currentPrev));
+      }
+    }
   }
 
-  const goNext = (name: string) => {
+  const goNext = (name: string, oldName: string| undefined) => {
+    if (oldName) setPrevious(previous => [...previous, oldName]);
     setThisType(getTypeByName(name));
   }
 
@@ -58,9 +64,9 @@ const Documentation = () => {
         <img className={styles['app__sidebar__img']} src="/docs.png" alt="docs" />
       </button>
     )}
-    {!sdlSchema && (<RingLoader loading={true} color={'#a359ff'} />)}
-    {openDoc && currentType && (<div className={styles.doc_wrapper}>
-      <SdlPart thisType={currentType} goNext={goNext} goPrevious={goPrevious} previous={previous} />
+    {!sdlSchema && (<ClipLoader size={30} loading={true} color={'#a359ff'} />)}
+    {openDoc && currentType && (<div className={styles.doc__wrapper}>
+      <SdlPart thisType={currentType} goNext={goNext} goPrevious={goPrevious} previous={previous[previous.length - 1]} />
     </div>)}
   </>);
 }

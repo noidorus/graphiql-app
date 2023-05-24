@@ -33,7 +33,7 @@ export interface Type {
 
 export interface SdlPartType {
   thisType: Type;
-  goNext: (name:string) => void;
+  goNext: (name:string, oldName:string | undefined) => void;
   goPrevious: () => void;
   previous: string | null;
 }

@@ -11,7 +11,7 @@ const SdlPart = ({ thisType, goNext, goPrevious, previous }: SdlPartType) => {
 
   const goNextThis = (event: React.SyntheticEvent) => {
     const name = event.currentTarget.textContent || '';
-    goNext(name);
+    goNext(name, thisType.name);
   }
 
   const fields = (thisType.fields && thisType.fields.length > 0) ?
@@ -25,10 +25,12 @@ const SdlPart = ({ thisType, goNext, goPrevious, previous }: SdlPartType) => {
         type = dataType.ofType.name;
         modifier ='[]';
       }
-      return <li data-name={name} key={data.name + '_field'}>
-        <span>{fieldName}</span> : {modifier}<span onClick={goNextThis}>{type}</span>
+      return <li key={data.name + '_field'}  className={styles['doc__one-position']}>
+        <span className={styles['doc__field-name']}>{fieldName}:</span> 
+        <span className={styles['doc__field-link']} onClick={goNextThis}>{type}</span>{modifier}
       </li>
     }) : '';
+
   const enumValues = (thisType.enumValues && thisType.enumValues.length > 0) ?
     thisType.enumValues.map((data) => {
       return <li onClick={goNextThis} key={data.name + '_enums'}>{data.name}</li>
@@ -40,24 +42,29 @@ const SdlPart = ({ thisType, goNext, goPrevious, previous }: SdlPartType) => {
 
   return (<div>
     {previous && (
-      <button className={styles.app__sidebar_docs} onClick={goPrevThis}>
+      <button className={styles.doc__previous} onClick={goPrevThis}>
         {previous}
       </button>
     )}
-    <h3>{thisType.name}</h3>
+    <h3 className={styles['doc__main-header']}>{thisType.name}</h3>
     {thisType.description && (
       <p>{thisType.description}</p>
     )
     }
 
-    {fields && <h4>Fields</h4>}
-    {fields}
+    {fields && (<><h4 className={styles['doc__sub-header']}>Fields</h4>
+    <ul>{fields}</ul></>)}
+    
 
-    {enumValues && <h4>Possible Values</h4>}
-    {enumValues}
+    {enumValues && (<><h4 className={styles['doc__sub-header']}>Possible Values</h4>
+    <ul>{enumValues}</ul>
+    </>)}
+    
 
-    {inputFields && <h4>input Fields</h4>}
-    {inputFields}
+    {inputFields && (<><h4 className={styles['doc__sub-header']}>input Fields</h4>
+    <ul>{inputFields}</ul>
+    </>)}
+    
   </div>);
 }
 

@@ -4,7 +4,7 @@ import styles from './style.module.scss';
 import CodeMirror, { basicSetup } from '@uiw/react-codemirror';
 import { graphql } from 'cm6-graphql';
 import { buildSchema } from "graphql";
-import { RingLoader } from 'react-spinners';
+import { ClipLoader } from 'react-spinners';
 import SCHEMA from '@/constants/Schema';
 import { fetchSchema } from './apiProvider';
 
@@ -95,7 +95,7 @@ const Editor = () => {
     />
           <div className={styles['editors__editor-toolbar']}>
             <button className={styles['editors__editor-button_start']}>
-            {loaded && (<RingLoader loading={true} color={'#a359ff'} />)}
+            {loaded && (<ClipLoader size={40} loading={true} color={'#a359ff'} />)}
             {!loaded && (<img src="/play.png" alt="start" onClick={sendRequest} />)}
             </button>
           </div>
