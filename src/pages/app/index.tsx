@@ -1,12 +1,13 @@
 import nookies from 'nookies';
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useEffect } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import Router from 'next/router';
 import Header from '@/components/Header';
 import PageContainer from '@/components/PageContainer';
 import { firebaseAdmin } from '@/firebase/firebaseAdmin';
 import ROUTES from '@/constants/routes';
+import { EditorType } from '@/components/Documentation/types';
 
 
 import styles from './style.module.scss';
@@ -42,6 +43,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
+
 const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   useEffect(() => {
     const handle = setInterval(async () => {
@@ -53,6 +55,11 @@ const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerS
     return () => clearInterval(handle);
   }, [expTime]);
 
+  const [editorKey, setEditorKey] = useState(1);
+
+  const clearEditor=(event:SyntheticEvent)=>{
+    setEditorKey(editorKey + 1);
+  }
 
 
   return (
@@ -62,13 +69,13 @@ const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerS
         <div className={styles.app}>
           <div className={styles['app__sidebar']}>
             <Documentation></Documentation>
-            <button className={styles.app__sidebar_refetch}>
+            <button className={styles.app__sidebar_refetch} onClick ={clearEditor}>
               <picture>
                 <img className={styles['app__sidebar__img']} src="/refetch.svg" alt="docs" />
               </picture>
             </button>
           </div>
-          <Editor />
+          <Editor key={editorKey}/>
         </div>
       </PageContainer>
       <Footer />

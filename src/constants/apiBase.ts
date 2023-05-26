@@ -1,3 +1,5 @@
+import { string } from "yup";
+
 export const API_URL = 'https://spacex-production.up.railway.app/';
 export const MAIN_ELEMENT = 'Query';
 export const SCHEMA_REQUEST = `query IntrospectionQuery {
@@ -106,7 +108,19 @@ export const DEFAULT_REQUEST = `query {
   } 
 }
 `;
-export const DEFAULT_OPTIONS = {
+
+export type HeadersType = {
+  "Content-Type":string,
+   [k: string]: string
+}
+
+export interface OptionsType {
+  method: string;
+  headers: HeadersType;
+  body: string;
+}
+
+export const DEFAULT_OPTIONS : OptionsType = {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: '',
