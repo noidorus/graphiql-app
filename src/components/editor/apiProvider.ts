@@ -1,13 +1,16 @@
 import { API_URL, DEFAULT_OPTIONS } from '@/constants/apiBase';
 import { SimpleHeaderType } from '../Documentation/types';
 
-
-type sendTypeObject = {query:string, variables?:string};
+type VariablesType = {[k: string]:string};
+type sendTypeObject = {query:string, variables?:VariablesType};
 
 export const fetchSchema = async (data:string, headers: undefined | SimpleHeaderType[], variables:string) => {
   const options = DEFAULT_OPTIONS;
   const sendBodyObject:sendTypeObject = {query: data};
-  if (variables) sendBodyObject.variables = variables;
+  if (variables) {
+    const parsedVariables = JSON.parse(variables) as VariablesType;
+    sendBodyObject.variables = parsedVariables;
+  }
   if (headers && headers.length > 0) {
     headers.forEach(data => options.headers[data.headerKey] = data.value);
   }
