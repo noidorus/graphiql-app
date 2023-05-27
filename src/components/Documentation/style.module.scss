@@ -17,3 +17,51 @@
 .doc-wrapper {
   @apply absolute;
 }
+
+.doc {
+  &__wrapper {
+    position: fixed;
+    width: 80vw;
+    height: 80vh;
+    background-color: white;
+    border-radius: 15px;
+    color: black;
+    z-index: 5;
+    overflow: auto;
+    top: 10vh;
+    left: 10vw;
+    padding: 15px;
+    ul {
+      list-style-type: none;
+
+    }
+  }
+  &__main-header {
+    color:rgb(63, 102, 102);
+    font-size: 2em;
+  }
+  &__sub-header {
+    color:green;
+    font-size: 1.5em;
+  }
+  &__field-name{
+    color:rgb(55, 26, 82);
+  }
+  &__field-name{
+    color:rgb(55, 26, 82);
+  }
+  &__field-link{
+    text-decoration: underline;
+    cursor: pointer;
+    color:rgb(63, 102, 70);
+    &:hover {
+      color:rgb(94, 63, 102);
+    }
+  }
+  &__one-position {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+  }
+}
+
