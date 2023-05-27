@@ -44,3 +44,26 @@ export const baseTypes = {
   'list': 'LIST',
 }
 
+export interface SimpleHeaderType {
+  headerKey:string;
+  value:string;
+  active:boolean;
+}
+
+export interface headersObject { [k: number]: SimpleHeaderType };
+
+export type EditorType = {defaultEditorValue:string, editorHeaders:headersObject, editorVariables:string};
+
+export interface HeaderEditorType {
+headers: headersObject;
+addHeader: (header:SimpleHeaderType) => number;
+removeHeader: (index:number) => void;
+updateHeader: (index:number, header:SimpleHeaderType) => void;
+}
+
+export interface OneHeaderType {
+index: number;
+headerData: SimpleHeaderType;
+removeHeader: (index:number) => void;
+updateHeader: (index:number, header:SimpleHeaderType) => void;
+}
