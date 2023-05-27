@@ -4,7 +4,7 @@ import { SimpleHeaderType } from '../Documentation/types';
 type VariablesType = {[k: string]:string};
 type sendTypeObject = {query:string, variables?:VariablesType};
 
-export const fetchSchema = async (data:string, headers: undefined | SimpleHeaderType[], variables:string) => {
+export const fetchSchema = async (data:string, headers?: undefined | SimpleHeaderType[], variables?:string) => {
   const options = DEFAULT_OPTIONS;
   const sendBodyObject:sendTypeObject = {query: data};
   if (variables) {
