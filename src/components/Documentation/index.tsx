@@ -2,73 +2,69 @@ import { SCHEMA_REQUEST, MAIN_ELEMENT } from '@/constants/apiBase';
 import { useEffect, useState } from 'react';
 import { fetchSchema } from '@/components/editor/apiProvider';
 import SdlPart from './SdlPart';
-import { Type } from './types';
-
-import styles from './style.module.scss';
-
-import { ClipLoader } from 'react-spinners';
+import { Schema, Type } from './types';
+import { RingLoader } from 'react-spinners';
 
 const Documentation = () => {
-  const [sdlSchema, setSdlSchema] = useState<boolean>(false);
   const [currentType, setThisType] = useState<Type | null>(null);
   const [allTypes, setAllTypes] = useState<Type[]>([]);
-  const [openDoc, setOpenDoc] = useState<boolean>(false);
   const [previous, setPrevious] = useState<string[]>([]);
 
   useEffect(() => {
     async function fetchData() {
       const originalSchema = await fetchSchema(SCHEMA_REQUEST);
-      schemaParsing(originalSchema);
-      setSdlSchema(true);
-    }
-    if (!sdlSchema) {
-      fetchData();
-    }
-  }, [sdlSchema]);
 
-  const changeStat = () => {
-    const firstElement = getTypeByName(MAIN_ELEMENT);
-    setThisType(firstElement);
-    setOpenDoc(!openDoc);
-  }
+      const { firstElement, schemaType } = schemaParsing(originalSchema);
+      setThisType(firstElement);
+      setAllTypes(schemaType);
+    }
 
-  const getTypeByName = (name: string): Type | null => {
-    let result = allTypes.filter((data: Type) => data.name === name);
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const getTypeByName = (arr: Type[], name: string): Type | null => {
+    let result = arr.filter((data: Type) => data.name === name);
     return result.length === 1 ? result[0] : null;
-  }
+  };
 
+  const schemaParsing = (originalSchema: Schema) => {
+    const schemaType: Type[] = originalSchema['data']['__schema']['types'].map(
+      (data: Type) => data
+    );
+    const firstElement = getTypeByName(schemaType, MAIN_ELEMENT);
 
-  const schemaParsing = (originalSchema: any) => {
-    const schemaType = originalSchema['data']['__schema']['types'].map((data: Type) => data);
-    setAllTypes(schemaType);
-  }
+    return { schemaType, firstElement };
+  };
 
   const goPrevious = () => {
     if (previous.length > 0) {
       const currentPrev = previous.pop();
-      setPrevious(previous => previous);
+      setPrevious((previous) => previous);
       if (currentPrev) {
-        setThisType(getTypeByName(currentPrev));
+        setThisType(getTypeByName(allTypes, currentPrev));
       }
     }
-  }
+  };
 
-  const goNext = (name: string, oldName: string| undefined) => {
-    if (oldName) setPrevious(previous => [...previous, oldName]);
-    setThisType(getTypeByName(name));
-  }
+  const goNext = (name: string, oldName: string | undefined) => {
+    if (oldName) setPrevious((previous) => [...previous, oldName]);
+    setThisType(getTypeByName(allTypes, name));
+  };
 
-  return (<>
-    {sdlSchema && (
-      <button className={styles.app__sidebar_docs} onClick={changeStat}>
-        <img className={styles['app__sidebar__img']} src="/docs.png" alt="docs" />
-      </button>
-    )}
-    {!sdlSchema && (<ClipLoader size={30} loading={true} color={'#a359ff'} />)}
-    {openDoc && currentType && (<div className={styles.doc__wrapper}>
-      <SdlPart thisType={currentType} goNext={goNext} goPrevious={goPrevious} previous={previous[previous.length - 1]} />
-    </div>)}
-  </>);
-}
+  return (
+    <>
+      {!currentType && <RingLoader loading={true} color={'#a359ff'} />}
+      {currentType && (
+        <SdlPart
+          thisType={currentType}
+          goNext={goNext}
+          goPrevious={goPrevious}
+          previous={previous[previous.length - 1]}
+        />
+      )}
+    </>
+  );
+};
 
 export default Documentation;

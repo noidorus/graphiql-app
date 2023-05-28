@@ -7,19 +7,80 @@ import Header from '@/components/Header';
 import PageContainer from '@/components/PageContainer';
 import { firebaseAdmin } from '@/firebase/firebaseAdmin';
 import ROUTES from '@/constants/routes';
-import { EditorType } from '@/components/Documentation/types';
-
 
 import styles from './style.module.scss';
 import Footer from '@/components/Footer';
 import Editor from '@/components/editor';
+import React from 'react';
 import { RingLoader } from 'react-spinners';
 import dynamic from 'next/dynamic';
-import React from 'react';
- 
+
+import { Modal } from '@/components/modal';
+import { logout } from '@/firebase/firebaseClient';
+
 const Documentation = dynamic(() => import('../../components/Documentation'), {
   loading: () => <RingLoader loading={true} color={'#a359ff'} />,
 });
+
+const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  useEffect(() => {
+    const handle = setInterval(async () => {
+      const currTime = Math.floor(Date.now() / 1000);
+      if (currTime > expTime) {
+        logout();
+        Router.push(ROUTES.WELCOME);
+      }
+    }, 60 * 1000);
+    return () => clearInterval(handle);
+  }, [expTime]);
+
+  const [editorKey, setEditorKey] = useState(1);
+  const [docOpen, setDocOpen] = useState(false);
+
+  const clearEditor = (event: SyntheticEvent) => {
+    setEditorKey(editorKey + 1);
+  };
+
+  const handleCloseDoc = () => {
+    setDocOpen(false);
+  };
+
+  const handleOpenDoc = () => {
+    setDocOpen(true);
+  };
+
+  return (
+    <>
+      <Header />
+      <PageContainer>
+        <div className={styles.app}>
+          <div className={styles['app__sidebar']}>
+            <button className={styles.app__sidebar_docs} onClick={handleOpenDoc}>
+              <picture>
+                <img className={styles['app__sidebar__img']} src="/docs.png" alt="docs" />
+              </picture>
+            </button>
+
+            <button className={styles.app__sidebar_refetch} onClick={clearEditor}>
+              <picture>
+                <img className={styles['app__sidebar__img']} src="/refetch.svg" alt="docs" />
+              </picture>
+            </button>
+          </div>
+
+          {docOpen && (
+            <Modal closeModal={handleCloseDoc}>
+              <Documentation />
+            </Modal>
+          )}
+
+          <Editor key={editorKey} />
+        </div>
+      </PageContainer>
+      <Footer />
+    </>
+  );
+};
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
@@ -41,46 +102,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       props: {} as never,
     };
   }
-};
-
-
-const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  useEffect(() => {
-    const handle = setInterval(async () => {
-      const currTime = Math.floor(Date.now() / 1000);
-      if (currTime > expTime) {
-        Router.push(ROUTES.WELCOME);
-      }
-    }, 60 * 1000);
-    return () => clearInterval(handle);
-  }, [expTime]);
-
-  const [editorKey, setEditorKey] = useState(1);
-
-  const clearEditor=(event:SyntheticEvent)=>{
-    setEditorKey(editorKey + 1);
-  }
-
-
-  return (
-    <>
-      <Header />
-      <PageContainer>
-        <div className={styles.app}>
-          <div className={styles['app__sidebar']}>
-            <Documentation></Documentation>
-            <button className={styles.app__sidebar_refetch} onClick ={clearEditor}>
-              <picture>
-                <img className={styles['app__sidebar__img']} src="/refetch.svg" alt="docs" />
-              </picture>
-            </button>
-          </div>
-          <Editor key={editorKey}/>
-        </div>
-      </PageContainer>
-      <Footer />
-    </>
-  );
 };
 
 export default AppPage;

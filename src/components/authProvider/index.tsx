@@ -7,7 +7,11 @@ const AuthContext = createContext<{ user: User | null }>({
   user: null,
 });
 
-export function AuthProvider({ children }: any) {
+interface Props {
+  children: JSX.Element;
+}
+
+export function AuthProvider({ children }: Props) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {

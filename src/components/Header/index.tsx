@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { auth } from '@/firebase/firebaseClient';
+import { logout } from '@/firebase/firebaseClient';
 import ROUTES from '@/constants/routes';
 import { useAuth } from '../authProvider';
 import Button from '../Button';
@@ -34,12 +34,8 @@ const Header = () => {
   }, []);
 
   const handleSignOut = async () => {
-    try {
-      await auth.signOut();
-      router.push(ROUTES.WELCOME);
-    } catch (error) {
-      console.error(error);
-    }
+    logout();
+    router.push(ROUTES.WELCOME);
   };
 
   return (
