@@ -17,7 +17,6 @@ export function getAuthError(e: unknown): string {
     case 'auth/wrong-password':
       return 'Wrong username or password!';
     default:
-      console.log(error.code);
       return error.message;
   }
 }

@@ -1,24 +1,8 @@
-.app {
-  @apply flex w-full gap-5 h-screen;
-  &__sidebar {
-    @apply flex flex-col justify-between gap-5 items-center;
-
-    &_docs {
-      @apply w-7 h-7 bg-transparent;
-    }
-
-    &__img {
-      filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(114deg) brightness(104%)
-        contrast(101%);
-    }
-  }
-}
-
-.doc-wrapper {
-  @apply absolute;
-}
-
 .doc {
+  ul {
+    list-style-type: none;
+  }
+
   &__previous {
     transition: 0.5s all;
     &_block {
@@ -34,23 +18,6 @@
     &:hover {
       text-decoration: underline;
       color: #856cff;
-    }
-  }
-  &__wrapper {
-    position: fixed;
-    width: 80vw;
-    height: 80vh;
-    background-color: #ffffff;
-    border-radius: 15px;
-    color: #4e5471;
-    z-index: 100;
-    overflow: auto;
-    top: 13vh;
-    left: 10vw;
-    padding: 20px;
-    border-radius: 10px;
-    ul {
-      list-style-type: none;
     }
   }
   &__main-header {
@@ -79,27 +46,5 @@
     display: flex;
     gap: 10px;
     margin-top: 5px;
-  }
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 99;
-}
-
-.doc__close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-
-  &_icon {
-    width: 20px;
-    height: 20px;
   }
 }

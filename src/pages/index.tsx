@@ -6,13 +6,17 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticProps, GetStaticPropsContext } from 'next';
 
 import styles from './style.module.scss';
+import { ErrorBoundaryWithMessage } from '@/components';
 
 export default function WelcomePage() {
   const { t } = useTranslation();
 
   return (
     <>
-      <Header />
+      <ErrorBoundaryWithMessage>
+        <Header />
+      </ErrorBoundaryWithMessage>
+
       <PageContainer>
         <div className={styles.welcome}>
           <div className={styles['welcome__wrapper']}>
