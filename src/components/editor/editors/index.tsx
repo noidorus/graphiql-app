@@ -9,7 +9,7 @@ import HeadersSection from '../headers';
 interface EditorsProps {
   editorsWidth: string;
   MIN_BLOCK_WIDTH: number;
-  currentExtensions: any[]; // Change the type as per your requirements
+  currentExtensions: any[];
   onChange: (value: string) => void;
   sendRequest: (event: SyntheticEvent) => void;
   editorValue: string;
@@ -25,8 +25,6 @@ interface EditorsProps {
   updateHeader: (ndex: number, header: SimpleHeaderType) => void;
   headers: headersObject;
 }
-
-
 
 export const Editors: FC<EditorsProps> = ({
   editorsWidth,
@@ -45,7 +43,7 @@ export const Editors: FC<EditorsProps> = ({
   addHeader,
   removeHeader,
   updateHeader,
-  headers
+  headers,
 }) => {
   const handleEditorChange = (value: string) => {
     onChange(value);

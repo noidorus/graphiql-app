@@ -13,7 +13,7 @@ import { headersObject, SimpleHeaderType } from '@/components/Documentation/type
 
 import styles from './style.module.scss';
 
-const MIN_BLOCK_WIDTH = 280;
+const MIN_BLOCK_WIDTH = 260;
 
 const Editor: React.FC = () => {
   const [isDragging, setIsDragging] = useState(false);
@@ -27,6 +27,24 @@ const Editor: React.FC = () => {
   const [variablesActive, setVariablesActive] = useState<boolean>(true);
   const [headers, setHeaders] = useState<headersObject>({});
   const [variables, setVariables] = useState<string>('');
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+
+      if (screenWidth < 1024) {
+        setEditorsWidth('100%');
+        setResponseWidth('100%')
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleMouseUp = (event: MouseEvent) => {
     setIsDragging(false);
