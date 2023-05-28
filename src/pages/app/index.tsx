@@ -49,7 +49,6 @@ const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerS
     setDocOpen(true);
   };
 
-  console.log(docOpen);
   return (
     <>
       <Header />
@@ -71,7 +70,7 @@ const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerS
 
           {docOpen && (
             <Modal closeModal={handleCloseDoc}>
-              <Documentation toggleDoc={handleCloseDoc} />
+              <Documentation />
             </Modal>
           )}
 

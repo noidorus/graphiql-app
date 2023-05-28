@@ -13,6 +13,7 @@ import Button from '@/components/Button';
 import { getAuthError } from '@/utils/helpers';
 
 import styles from './style.module.scss';
+import { ErrorBoundaryWithMessage } from '../';
 
 interface Props {
   authCallback: (email: string, password: string) => Promise<UserCredential>;
@@ -116,11 +117,13 @@ const AuthView = ({ authCallback, page }: Props) => {
             </div>
           </div>
 
-          <Button
-            type="submit"
-            text={page === 'SIGN_IN' ? `${t('header.btn-signin')}` : `${t('header.btn-signup')}`}
-            iconProps={{ src: '/log-in.svg', alt: 'log-in icon', size: 32 }}
-          />
+          <ErrorBoundaryWithMessage>
+            <Button
+              type="submit"
+              text={page === 'SIGN_IN' ? `${t('header.btn-signin')}` : `${t('header.btn-signup')}`}
+              iconProps={{ src: '/log-in.svg', alt: 'log-in icon', size: 32 }}
+            />
+          </ErrorBoundaryWithMessage>
 
           <p>
             {page === 'SIGN_IN' ? (

@@ -6,13 +6,13 @@ import ROUTES from '@/constants/routes';
 import { firebaseAdmin } from '@/firebase/firebaseAdmin';
 import AuthView from '@/components/authView';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { ErrorBoundaryWithMessage } from '@/components';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     const cookies = nookies.get(ctx);
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
     const { uid } = token;
-
 
     return {
       redirect: {
@@ -39,9 +39,9 @@ const SignIn = () => {
   };
 
   return (
-    <ErrorBoundary fallback={<div>Something went wrong...</div>}>
+    <ErrorBoundaryWithMessage>
       <AuthView authCallback={onSignIn} page="SIGN_IN" />
-    </ErrorBoundary>
+    </ErrorBoundaryWithMessage>
   );
 };
 

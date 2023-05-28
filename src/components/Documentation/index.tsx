@@ -5,11 +5,7 @@ import SdlPart from './SdlPart';
 import { Type } from './types';
 import { RingLoader } from 'react-spinners';
 
-interface Props {
-  toggleDoc: () => void;
-}
-
-const Documentation = ({ toggleDoc }: Props) => {
+const Documentation = () => {
   const [currentType, setThisType] = useState<Type | null>(null);
   const [allTypes, setAllTypes] = useState<Type[]>([]);
   const [previous, setPrevious] = useState<string[]>([]);
@@ -17,8 +13,8 @@ const Documentation = ({ toggleDoc }: Props) => {
   useEffect(() => {
     async function fetchData() {
       const originalSchema = await fetchSchema(SCHEMA_REQUEST);
-      const { firstElement, schemaType } = schemaParsing(originalSchema);
 
+      const { firstElement, schemaType } = schemaParsing(originalSchema);
       setThisType(firstElement);
       setAllTypes(schemaType);
     }
@@ -36,6 +32,7 @@ const Documentation = ({ toggleDoc }: Props) => {
     const schemaType: Type[] = originalSchema['data']['__schema']['types'].map(
       (data: Type) => data
     );
+
     const firstElement = getTypeByName(schemaType, MAIN_ELEMENT);
 
     return { schemaType, firstElement };
