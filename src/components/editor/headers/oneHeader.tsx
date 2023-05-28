@@ -6,7 +6,6 @@ const OneHeader = ({removeHeader, updateHeader, index, headerData}:OneHeaderType
   const [active, setActive] = useState<boolean>(headerData.active);
 
   const changeActive = (event:SyntheticEvent) => {
-    console.log('1',active);
     const newActive = !active;
     setActive(newActive);
     changeHeader(newActive);
