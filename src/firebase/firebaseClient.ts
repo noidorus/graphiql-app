@@ -27,7 +27,6 @@ const getFirebaseApp = (config = {}) => {
   try {
     return getApp();
   } catch (e) {
-    // console.log(e);
     return initializeApp(config);
   }
 };

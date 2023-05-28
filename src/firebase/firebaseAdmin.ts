@@ -5,7 +5,7 @@ const projectId = process.env.NEXT_PUBLIC_FB_PROJECT_ID;
 const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
 
 if (!privateKey || !projectId || !clientEmail) {
-  console.log(
+  throw new Error(
     `Failed to load Firebase credentials. Follow the instructions in the README to set your Firebase credentials inside environment variables.`
   );
 }
