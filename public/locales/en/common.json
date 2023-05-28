@@ -11,7 +11,7 @@
     "Maria": "Maria",
     "Maria-description": "Maria was responsible for localization, layout design of pages, and responsiveness. She configured the header and footer as well.",
     "Anna": "Anna",
-    "Anna-description": "Anna was in charge of parsing documentation and displaying the output of the editor's editing. She also integrated CodeMirror."
+    "Anna-description": "Anna was in charge of integrate documentation and displaying the output of the editor's editing. She also integrated CodeMirror."
   },
   "header": {
     "btn-signin": "Sign In",
@@ -45,5 +45,10 @@
     "placeholder-email": "Enter your email",
     "placeholder-password": "Enter your password",
     "required": "Required field!"
+  },
+  "app": {
+    "new-header": "New Header",
+    "variables": "Variables",
+    "headers": "Headers"
   }
 }
