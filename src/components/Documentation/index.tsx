@@ -3,46 +3,42 @@ import { useEffect, useState } from 'react';
 import { fetchSchema } from '@/components/editor/apiProvider';
 import SdlPart from './SdlPart';
 import { Type } from './types';
+import { RingLoader } from 'react-spinners';
 
-import styles from './style.module.scss';
+interface Props {
+  toggleDoc: () => void;
+}
 
-import { ClipLoader } from 'react-spinners';
-
-const Documentation = () => {
-  const [sdlSchema, setSdlSchema] = useState<boolean>(false);
+const Documentation = ({ toggleDoc }: Props) => {
   const [currentType, setThisType] = useState<Type | null>(null);
   const [allTypes, setAllTypes] = useState<Type[]>([]);
-  const [openDoc, setOpenDoc] = useState<boolean>(false);
   const [previous, setPrevious] = useState<string[]>([]);
-  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       const originalSchema = await fetchSchema(SCHEMA_REQUEST);
-      schemaParsing(originalSchema);
-      setSdlSchema(true);
-    }
-    if (!sdlSchema) {
-      fetchData();
-    }
-  }, [sdlSchema]);
+      const { firstElement, schemaType } = schemaParsing(originalSchema);
 
-  const changeStat = () => {
-    const firstElement = getTypeByName(MAIN_ELEMENT);
-    setThisType(firstElement);
-    setOpenDoc(!openDoc);
-    toggleOverlay();
-    resetPrevious();
-  };
+      setThisType(firstElement);
+      setAllTypes(schemaType);
+    }
 
-  const getTypeByName = (name: string): Type | null => {
-    let result = allTypes.filter((data: Type) => data.name === name);
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const getTypeByName = (arr: Type[], name: string): Type | null => {
+    let result = arr.filter((data: Type) => data.name === name);
     return result.length === 1 ? result[0] : null;
   };
 
   const schemaParsing = (originalSchema: any) => {
-    const schemaType = originalSchema['data']['__schema']['types'].map((data: Type) => data);
-    setAllTypes(schemaType);
+    const schemaType: Type[] = originalSchema['data']['__schema']['types'].map(
+      (data: Type) => data
+    );
+    const firstElement = getTypeByName(schemaType, MAIN_ELEMENT);
+
+    return { schemaType, firstElement };
   };
 
   const goPrevious = () => {
@@ -50,54 +46,26 @@ const Documentation = () => {
       const currentPrev = previous.pop();
       setPrevious((previous) => previous);
       if (currentPrev) {
-        setThisType(getTypeByName(currentPrev));
+        setThisType(getTypeByName(allTypes, currentPrev));
       }
     }
   };
 
   const goNext = (name: string, oldName: string | undefined) => {
     if (oldName) setPrevious((previous) => [...previous, oldName]);
-    setThisType(getTypeByName(name));
-  };
-
-  const toggleOverlay = () => {
-    setIsOverlayVisible(!isOverlayVisible);
-  };
-
-  const closeDocumentation = () => {
-    setOpenDoc(false);
-    setIsOverlayVisible(false);
-  };
-
-  const resetPrevious = () => {
-    setPrevious([]);
+    setThisType(getTypeByName(allTypes, name));
   };
 
   return (
     <>
-      {sdlSchema && (
-        <button className={styles.app__sidebar_docs} onClick={changeStat}>
-          <picture>
-            <img className={styles['app__sidebar__img']} src="/docs.png" alt="docs" />
-          </picture>
-        </button>
-      )}
-      {!sdlSchema && <ClipLoader size={30} loading={true} color={'#a359ff'} />}
-      {openDoc && currentType && (
-        <>
-          {isOverlayVisible && <div className={styles.overlay} onClick={closeDocumentation} />} {/* Оверлей */}
-          <div className={styles.doc__wrapper}>
-            <button className={styles.doc__close} onClick={closeDocumentation}>
-              <picture><img className={styles.doc__close_icon} src="/close-doc.png" alt="close" /></picture>
-            </button>
-            <SdlPart
-              thisType={currentType}
-              goNext={goNext}
-              goPrevious={goPrevious}
-              previous={previous[previous.length - 1]}
-            />
-          </div>
-        </>
+      {!currentType && <RingLoader loading={true} color={'#a359ff'} />}
+      {currentType && (
+        <SdlPart
+          thisType={currentType}
+          goNext={goNext}
+          goPrevious={goPrevious}
+          previous={previous[previous.length - 1]}
+        />
       )}
     </>
   );

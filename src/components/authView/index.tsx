@@ -69,7 +69,9 @@ const AuthView = ({ authCallback, page }: Props) => {
             {t('sign.use')}
           </span>
 
-          <Link className={styles['form__title_link']} href={ROUTES.WELCOME}>{t('sign.GraphiQL')}</Link>
+          <Link className={styles['form__title_link']} href={ROUTES.WELCOME}>
+            {t('sign.GraphiQL')}
+          </Link>
         </h2>
 
         <form className={styles['form']} onSubmit={onSubmit}>
