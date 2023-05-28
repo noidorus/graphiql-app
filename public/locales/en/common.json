@@ -7,11 +7,11 @@
     "course": "React course covers fundamentals, real-world applications, popular libraries and tools, preparing students for real React projects.",
     "team": "Our team",
     "Rodion": "Rodion",
-    "Rodion-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie.",
+    "Rodion-description": "Rodion was involved in integrating auth, error boundary,a spinner, and deployment, tests. Overall, he was an excellent team leader.",
     "Maria": "Maria",
-    "Maria-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie.",
+    "Maria-description": "Maria was responsible for localization, layout design of pages, and responsiveness. She configured the header and footer as well.",
     "Anna": "Anna",
-    "Anna-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie."
+    "Anna-description": "Anna was in charge of integrate documentation and displaying the output of the editor's editing. She also integrated CodeMirror."
   },
   "header": {
     "btn-signin": "Sign In",
@@ -45,5 +45,10 @@
     "placeholder-email": "Enter your email",
     "placeholder-password": "Enter your password",
     "required": "Required field!"
+  },
+  "app": {
+    "new-header": "New Header",
+    "variables": "Variables",
+    "headers": "Headers"
   }
 }

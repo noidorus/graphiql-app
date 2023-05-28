@@ -1,10 +1,13 @@
 import { HeaderEditorType, SimpleHeaderType } from '@/components/Documentation/types';
 import OneHeader from './oneHeader';
 import { SyntheticEvent } from 'react';
+import { useTranslation } from 'next-i18next';
 
 import styles from './style.module.scss';
 
 const HeadersSection = ({ headers, addHeader, removeHeader, updateHeader }: HeaderEditorType) => {
+  const { t } = useTranslation();
+
   const newHeader = (event: SyntheticEvent) => {
     const newEmptyHeader: SimpleHeaderType = {
       headerKey: '',
@@ -33,7 +36,7 @@ const HeadersSection = ({ headers, addHeader, removeHeader, updateHeader }: Head
           <picture>
             <img className={styles['editors__editor-tool_icon']} src="/plus.png" alt="add" />
           </picture>
-          New Header
+          {t('app.new-header')}
         </button>
       </header>
       {headersElements}

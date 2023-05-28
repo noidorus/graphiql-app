@@ -7,11 +7,11 @@
     "course": "Курс по React охватывает основы, применение в реальных проектах, популярные библиотеки и инструменты, подготавливая студентов к реальным проектам на React.",
     "team": "Наша команда",
     "Rodion": "Родион",
-    "Rodion-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie.",
+    "Rodion-description": "Родион занимался подключением авторизации,error boundary ,спиннера и сделал деплой и вообще был замечательным тимлидом.",
     "Maria": "Мария",
-    "Maria-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie.",
+    "Maria-description": "Мария занималась локализацией, версткой страниц и адаптивом до 320px, настроила хедер и футер",
     "Anna": "Анна",
-    "Anna-description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec mauris vel velit commodo molestie."
+    "Anna-description": "Анна занималась интеграцией документации и выводом ответа от редактирования редактора, подключила codemirror."
   },
   "header": {
     "btn-signin": "Войти",
@@ -45,5 +45,10 @@
     "placeholder-email": "Введите вашу электронную почту",
     "placeholder-password": "Введите ваш пароль",
     "required": "Обязательное поле!"
+  },
+  "app": {
+    "new-header": "Новый заголовок",
+    "variables": "Переменные",
+    "headers": "Заголовки"
   }
 }

@@ -2,14 +2,16 @@ import React, { FC, ChangeEvent, SyntheticEvent } from 'react';
 import { ClipLoader } from 'react-spinners';
 import CodeMirror, { basicSetup } from '@uiw/react-codemirror';
 import { headersObject, SimpleHeaderType } from '@/components/Documentation/types';
+import HeadersSection from '../headers';
+import { Extension } from '@codemirror/state';
+import { useTranslation } from 'next-i18next';
 
 import styles from '../style.module.scss';
-import HeadersSection from '../headers';
 
 interface EditorsProps {
   editorsWidth: string;
   MIN_BLOCK_WIDTH: number;
-  currentExtensions: any[];
+  currentExtensions: Extension[];
   onChange: (value: string) => void;
   sendRequest: (event: SyntheticEvent) => void;
   editorValue: string;
@@ -45,6 +47,8 @@ export const Editors: FC<EditorsProps> = ({
   updateHeader,
   headers,
 }) => {
+  const { t } = useTranslation();
+
   const handleEditorChange = (value: string) => {
     onChange(value);
   };
@@ -72,10 +76,10 @@ export const Editors: FC<EditorsProps> = ({
       </div>
       <div className={styles['editors__editor-tools']}>
         <button onClick={setVariablesView} className={styles['editors__editor-tools__item']}>
-          Variables
+          {t('app.variables')}
         </button>
         <button onClick={setHeadersView} className={styles['editors__editor-tools__item']}>
-          Headers
+          {t('app.headers')}
         </button>
       </div>
       {variablesActive && (
