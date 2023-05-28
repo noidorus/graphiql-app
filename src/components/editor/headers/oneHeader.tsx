@@ -39,11 +39,25 @@ const OneHeader = ({ removeHeader, updateHeader, index, headerData }: OneHeaderT
   return (
     <div className={styles['editors__editor-header']}>
       <input type="checkbox" checked={active} onChange={changeActive} />
-      <input className={styles['editors__editor-header_input']} placeholder="key" value={headerKey} onInput={changeKey} />
-      <input className={styles['editors__editor-header_input']} placeholder="value" value={value} onInput={changeValue} />
-      <button onClick={delHeader}>
+      <input
+        className={styles['editors__editor-header_input']}
+        placeholder="key"
+        value={headerKey}
+        onInput={changeKey}
+      />
+      <input
+        className={styles['editors__editor-header_input']}
+        placeholder="value"
+        value={value}
+        onInput={changeValue}
+      />
+      <button className={styles['editors__editor-tool_btn_delete']} onClick={delHeader}>
         <picture>
-          <img className={styles['editors__editor-tool_icon']} src="/delete-header.png" alt="delete" />
+          <img
+            className={styles['editors__editor-tool_icon']}
+            src="/delete-header.png"
+            alt="delete"
+          />
         </picture>
       </button>
     </div>

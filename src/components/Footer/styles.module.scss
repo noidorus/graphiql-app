@@ -5,6 +5,7 @@
   @apply flex justify-between items-center text-xl p-5;
 
   @media (max-width: 768px) {
+    margin-top: 25px;
     @apply flex-col gap-4;
   }
 

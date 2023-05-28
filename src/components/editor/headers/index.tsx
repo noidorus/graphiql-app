@@ -29,10 +29,11 @@ const HeadersSection = ({ headers, addHeader, removeHeader, updateHeader }: Head
   return (
     <div className={styles['editors__editor-tool']}>
       <header>
-        <button onClick={newHeader}>
+        <button className={styles['editors__editor-tool_btn_add']} onClick={newHeader}>
           <picture>
             <img className={styles['editors__editor-tool_icon']} src="/plus.png" alt="add" />
           </picture>
+          New Header
         </button>
       </header>
       {headersElements}
