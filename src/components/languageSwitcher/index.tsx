@@ -7,7 +7,6 @@ const LanguageSwitcher = () => {
   const router = useRouter();
 
   const { locales, locale: activeLocale } = router;
-
   const otherLocales = locales?.filter((locale) => locale !== activeLocale && locale !== 'default');
 
   return (
@@ -16,14 +15,22 @@ const LanguageSwitcher = () => {
         const { pathname, query, asPath } = router;
         return (
           <span key={'locale-' + locale}>
-            <Link href={{ pathname, query }} as={asPath} locale={locale}>
+            <Link href={{ pathname, query }} as={asPath} locale={locale} data-testid="lang-btn">
               {locale === 'en' ? (
                 <picture>
-                  <img className={styles['language-switcher']} src="/english.png" alt="english"></img>
+                  <img
+                    className={styles['language-switcher']}
+                    src="/english.png"
+                    alt="english"
+                  ></img>
                 </picture>
               ) : locale === 'ru' ? (
                 <picture>
-                  <img className={styles['language-switcher']} src="/russian.png" alt="russian"></img>
+                  <img
+                    className={styles['language-switcher']}
+                    src="/russian.png"
+                    alt="russian"
+                  ></img>
                 </picture>
               ) : null}
             </Link>

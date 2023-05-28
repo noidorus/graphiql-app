@@ -10,11 +10,12 @@ type ButtonProps = {
     alt: string;
     size: number;
   };
+  testId?: string;
 };
 
-const Button = ({ onClick, type = 'button', text, iconProps }: ButtonProps) => {
+const Button = ({ onClick, type = 'button', text, iconProps, testId }: ButtonProps) => {
   return (
-    <button type={type} className={styles.btn} onClick={onClick}>
+    <button type={type} className={styles.btn} onClick={onClick} data-testid={testId}>
       {iconProps ? (
         <Image
           src={iconProps.src}
