@@ -14,6 +14,7 @@ const Documentation = () => {
   const [allTypes, setAllTypes] = useState<Type[]>([]);
   const [openDoc, setOpenDoc] = useState<boolean>(false);
   const [previous, setPrevious] = useState<string[]>([]);
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -30,45 +31,76 @@ const Documentation = () => {
     const firstElement = getTypeByName(MAIN_ELEMENT);
     setThisType(firstElement);
     setOpenDoc(!openDoc);
-  }
+    toggleOverlay();
+    resetPrevious();
+  };
 
   const getTypeByName = (name: string): Type | null => {
     let result = allTypes.filter((data: Type) => data.name === name);
     return result.length === 1 ? result[0] : null;
-  }
-
+  };
 
   const schemaParsing = (originalSchema: any) => {
     const schemaType = originalSchema['data']['__schema']['types'].map((data: Type) => data);
     setAllTypes(schemaType);
-  }
+  };
 
   const goPrevious = () => {
     if (previous.length > 0) {
       const currentPrev = previous.pop();
-      setPrevious(previous => previous);
+      setPrevious((previous) => previous);
       if (currentPrev) {
         setThisType(getTypeByName(currentPrev));
       }
     }
-  }
+  };
 
-  const goNext = (name: string, oldName: string| undefined) => {
-    if (oldName) setPrevious(previous => [...previous, oldName]);
+  const goNext = (name: string, oldName: string | undefined) => {
+    if (oldName) setPrevious((previous) => [...previous, oldName]);
     setThisType(getTypeByName(name));
-  }
+  };
 
-  return (<>
-    {sdlSchema && (
-      <button className={styles.app__sidebar_docs} onClick={changeStat}>
-        <img className={styles['app__sidebar__img']} src="/docs.png" alt="docs" />
-      </button>
-    )}
-    {!sdlSchema && (<ClipLoader size={30} loading={true} color={'#a359ff'} />)}
-    {openDoc && currentType && (<div className={styles.doc__wrapper}>
-      <SdlPart thisType={currentType} goNext={goNext} goPrevious={goPrevious} previous={previous[previous.length - 1]} />
-    </div>)}
-  </>);
-}
+  const toggleOverlay = () => {
+    setIsOverlayVisible(!isOverlayVisible);
+  };
+
+  const closeDocumentation = () => {
+    setOpenDoc(false);
+    setIsOverlayVisible(false);
+  };
+
+  const resetPrevious = () => {
+    setPrevious([]);
+  };
+
+  return (
+    <>
+      {sdlSchema && (
+        <button className={styles.app__sidebar_docs} onClick={changeStat}>
+          <picture>
+            <img className={styles['app__sidebar__img']} src="/docs.png" alt="docs" />
+          </picture>
+        </button>
+      )}
+      {!sdlSchema && <ClipLoader size={30} loading={true} color={'#a359ff'} />}
+      {openDoc && currentType && (
+        <>
+          {isOverlayVisible && <div className={styles.overlay} onClick={closeDocumentation} />} {/* Оверлей */}
+          <div className={styles.doc__wrapper}>
+            <button className={styles.doc__close} onClick={closeDocumentation}>
+              <picture><img className={styles.doc__close_icon} src="/close-doc.png" alt="close" /></picture>
+            </button>
+            <SdlPart
+              thisType={currentType}
+              goNext={goNext}
+              goPrevious={goPrevious}
+              previous={previous[previous.length - 1]}
+            />
+          </div>
+        </>
+      )}
+    </>
+  );
+};
 
 export default Documentation;

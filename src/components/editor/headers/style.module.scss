@@ -19,6 +19,16 @@
   &__editor {
     @apply overflow-auto;
 
+    &-header {
+      @apply flex justify-between rounded-t-2xl;
+
+      &_input {
+        outline: none;
+        background-color: #f6f6f6;
+        padding: 3px;
+      }
+    }
+
     &-block {
       border-bottom: 1px solid #6d749b;
       @apply flex justify-between h-3/6 gap-6 p-2;
@@ -53,6 +63,11 @@
 
     &-tool {
       @apply p-2 overflow-auto;
+
+      &_icon {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }
