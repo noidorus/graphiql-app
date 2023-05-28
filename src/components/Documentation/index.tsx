@@ -2,7 +2,7 @@ import { SCHEMA_REQUEST, MAIN_ELEMENT } from '@/constants/apiBase';
 import { useEffect, useState } from 'react';
 import { fetchSchema } from '@/components/editor/apiProvider';
 import SdlPart from './SdlPart';
-import { Type } from './types';
+import { Schema, Type } from './types';
 import { RingLoader } from 'react-spinners';
 
 const Documentation = () => {
@@ -28,11 +28,10 @@ const Documentation = () => {
     return result.length === 1 ? result[0] : null;
   };
 
-  const schemaParsing = (originalSchema: any) => {
+  const schemaParsing = (originalSchema: Schema) => {
     const schemaType: Type[] = originalSchema['data']['__schema']['types'].map(
       (data: Type) => data
     );
-
     const firstElement = getTypeByName(schemaType, MAIN_ELEMENT);
 
     return { schemaType, firstElement };

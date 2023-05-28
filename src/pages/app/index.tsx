@@ -16,6 +16,7 @@ import { RingLoader } from 'react-spinners';
 import dynamic from 'next/dynamic';
 
 import { Modal } from '@/components/modal';
+import { logout } from '@/firebase/firebaseClient';
 
 const Documentation = dynamic(() => import('../../components/Documentation'), {
   loading: () => <RingLoader loading={true} color={'#a359ff'} />,
@@ -26,8 +27,7 @@ const AppPage = ({ exp: expTime }: InferGetServerSidePropsType<typeof getServerS
     const handle = setInterval(async () => {
       const currTime = Math.floor(Date.now() / 1000);
       if (currTime > expTime) {
-        nookies.destroy(null, 'token');
-        nookies.set(null, 'token', '', { path: '/' });
+        logout();
         Router.push(ROUTES.WELCOME);
       }
     }, 60 * 1000);
