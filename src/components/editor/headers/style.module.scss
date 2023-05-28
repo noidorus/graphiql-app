@@ -69,6 +69,10 @@
     &-tool {
       @apply p-2 overflow-auto;
 
+      @media (max-width: 1024px) {
+        height: 34%;
+      }
+
       &_btn {
         &_add {
           display: flex;

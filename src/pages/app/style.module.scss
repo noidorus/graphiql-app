@@ -1,8 +1,17 @@
 .app {
   @apply flex w-full gap-5 h-screen;
 
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   &__sidebar {
     @apply flex flex-col justify-between gap-5 items-center;
+
+    @media (max-width: 1024px) {
+      flex-direction: row;
+    }
 
     &_docs,
     &_refetch {
