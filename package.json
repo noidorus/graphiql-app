@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cy:open": "cypress open --e2e --browser chrome",
+    "cy:run-e2e": "cypress run --e2e",
+    "e2e:coverage": "npx start-server-and-test dev http://localhost:3000 cy:run-e2e && npx nyc report --reporter=text-summary"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
@@ -17,6 +20,7 @@
     "@types/react-i18next": "^8.1.0",
     "@uiw/react-codemirror": "^4.19.16",
     "autoprefixer": "10.4.14",
+    "babel": "^6.23.0",
     "cm6-graphql": "^0.0.7",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.4",
@@ -39,15 +43,20 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.10.6",
     "@hookform/resolvers": "^3.1.0",
     "@swc-node/register": "^1.6.5",
+    "babel-plugin-istanbul": "^6.1.1",
+    "cypress": "^12.12.0",
     "firebase": "^9.21.0",
     "next-redux-wrapper": "^8.1.0",
+    "nyc": "^15.1.0",
     "prettier": "^2.8.8",
     "react-error-boundary": "^4.0.4",
     "react-hook-form": "^7.43.9",
     "react-spinners": "^0.13.8",
     "redux-firestore": "^2.0.0",
+    "start-server-and-test": "^2.0.0",
     "yup": "^1.1.1"
   }
 }
