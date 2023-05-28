@@ -8,6 +8,9 @@ const OneHeader = ({ removeHeader, updateHeader, index, headerData }: OneHeaderT
   const [value, setValue] = useState<string>(headerData.value);
   const [active, setActive] = useState<boolean>(headerData.active);
 
+  const keyRegexp = /[^a-zA-Z0-9-_]/g;
+  const valueRegexp = /[^a-zA-Z0-9-_:;,"'!@<>=#&`~%\^\$\|\.\*\+\(\)\[\]\?/\//{}]/g;
+
   const changeActive = (event: SyntheticEvent) => {
     const newActive = !active;
     setActive(newActive);
@@ -16,13 +19,15 @@ const OneHeader = ({ removeHeader, updateHeader, index, headerData }: OneHeaderT
 
   const changeKey = (event: SyntheticEvent) => {
     const element = event.target as HTMLInputElement;
-    setHeaderKey(element.value);
+    const newHeaderKey = element.value.replaceAll(keyRegexp, '');
+    setHeaderKey(newHeaderKey);
     changeHeader(active);
   };
 
   const changeValue = (event: SyntheticEvent) => {
     const element = event.target as HTMLInputElement;
-    setValue(element.value);
+    const newHeaderKey = element.value.replaceAll(valueRegexp, '');
+    setValue(newHeaderKey);
     changeHeader(active);
   };
 

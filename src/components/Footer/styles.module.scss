@@ -2,10 +2,10 @@
   height: 50px;
   max-width: 1440px;
   margin: 0 auto;
+  margin-top: 25px;
   @apply flex justify-between items-center text-xl p-5;
 
   @media (max-width: 768px) {
-    margin-top: 25px;
     @apply flex-col gap-4;
   }
 

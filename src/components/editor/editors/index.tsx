@@ -2,14 +2,15 @@ import React, { FC, ChangeEvent, SyntheticEvent } from 'react';
 import { ClipLoader } from 'react-spinners';
 import CodeMirror, { basicSetup } from '@uiw/react-codemirror';
 import { headersObject, SimpleHeaderType } from '@/components/Documentation/types';
+import HeadersSection from '../headers';
+import { Extension } from '@codemirror/state';
 
 import styles from '../style.module.scss';
-import HeadersSection from '../headers';
 
 interface EditorsProps {
   editorsWidth: string;
   MIN_BLOCK_WIDTH: number;
-  currentExtensions: any[];
+  currentExtensions: Extension[];
   onChange: (value: string) => void;
   sendRequest: (event: SyntheticEvent) => void;
   editorValue: string;
