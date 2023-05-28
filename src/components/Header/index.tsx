@@ -5,11 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { auth } from '@/firebase/firebaseClient';
+import { Button, useAuth, LanguageSwitcher } from '@/components';
 import ROUTES from '@/constants/routes';
-import { useAuth } from '../authProvider';
-import Button from '../Button';
-import LanguageSwitcher from '../languageSwitcher';
-
 import styles from './styles.module.scss';
 
 const Header = () => {
@@ -90,4 +87,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export { Header };

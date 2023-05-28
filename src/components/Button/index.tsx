@@ -1,16 +1,6 @@
 import styles from './styles.module.scss';
 import Image from 'next/image';
-
-type ButtonProps = {
-  onClick?: () => void | Promise<boolean> | Promise<void>;
-  type: 'button' | 'reset' | 'submit';
-  text: string;
-  iconProps?: {
-    src: string;
-    alt: string;
-    size: number;
-  };
-};
+import { ButtonProps } from './types';
 
 const Button = ({ onClick, type = 'button', text, iconProps }: ButtonProps) => {
   return (
@@ -28,4 +18,4 @@ const Button = ({ onClick, type = 'button', text, iconProps }: ButtonProps) => {
   );
 };
 
-export default Button;
+export { Button };

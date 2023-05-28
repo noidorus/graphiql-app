@@ -7,7 +7,7 @@ const AuthContext = createContext<{ user: User | null }>({
   user: null,
 });
 
-export function AuthProvider({ children }: any) {
+const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -31,8 +31,10 @@ export function AuthProvider({ children }: any) {
   }, []);
 
   return <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>;
-}
+};
 
-export const useAuth = () => {
+const useAuth = () => {
   return useContext(AuthContext);
 };
+
+export { AuthProvider, useAuth };

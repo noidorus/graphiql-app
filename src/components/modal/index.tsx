@@ -1,13 +1,9 @@
 import React, { MouseEvent } from 'react';
 
+import { Props } from './types';
 import styles from './style.module.scss';
 
-interface IProps {
-  children: JSX.Element | null;
-  closeModal: () => void;
-}
-
-const Modal = ({ children, closeModal }: IProps) => {
+const Modal = ({ children, closeModal }: Props) => {
   return (
     <>
       <div className={styles.overlay} onClick={closeModal} />

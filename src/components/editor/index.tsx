@@ -168,4 +168,4 @@ const Editor: React.FC = () => {
   );
 };
 
-export default Editor;
+export { Editor };

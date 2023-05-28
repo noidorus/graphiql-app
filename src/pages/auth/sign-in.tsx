@@ -1,12 +1,11 @@
 import nookies from 'nookies';
 import { GetServerSidePropsContext } from 'next';
-import { ErrorBoundary } from 'react-error-boundary';
+
 import { logInWithEmailAndPassword } from '@/firebase/firebaseClient';
-import ROUTES from '@/constants/routes';
 import { firebaseAdmin } from '@/firebase/firebaseAdmin';
-import AuthView from '@/components/authView';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { ErrorBoundaryWithMessage } from '@/components';
+import { ErrorBoundaryWithMessage, AuthView } from '@/components';
+import ROUTES from '@/constants/routes';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {

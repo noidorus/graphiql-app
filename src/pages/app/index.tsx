@@ -1,21 +1,17 @@
 import nookies from 'nookies';
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from 'next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { SyntheticEvent, useEffect, useState } from 'react';
-import Router from 'next/router';
-import Header from '@/components/Header';
-import PageContainer from '@/components/PageContainer';
-import { firebaseAdmin } from '@/firebase/firebaseAdmin';
-import ROUTES from '@/constants/routes';
 
-import styles from './style.module.scss';
-import Footer from '@/components/Footer';
-import Editor from '@/components/editor';
-import React from 'react';
-import { RingLoader } from 'react-spinners';
 import dynamic from 'next/dynamic';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
+import Router from 'next/router';
+import { RingLoader } from 'react-spinners';
 
-import { Modal } from '@/components/modal';
+import { firebaseAdmin } from '@/firebase/firebaseAdmin';
+import { Modal, Footer, Header, PageContainer, Editor } from '@/components';
+
+import ROUTES from '@/constants/routes';
+import styles from './style.module.scss';
 
 const Documentation = dynamic(() => import('../../components/Documentation'), {
   loading: () => <RingLoader loading={true} color={'#a359ff'} />,

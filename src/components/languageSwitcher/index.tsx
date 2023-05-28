@@ -19,11 +19,19 @@ const LanguageSwitcher = () => {
             <Link href={{ pathname, query }} as={asPath} locale={locale}>
               {locale === 'en' ? (
                 <picture>
-                  <img className={styles['language-switcher']} src="/english.png" alt="english"></img>
+                  <img
+                    className={styles['language-switcher']}
+                    src="/english.png"
+                    alt="english"
+                  ></img>
                 </picture>
               ) : locale === 'ru' ? (
                 <picture>
-                  <img className={styles['language-switcher']} src="/russian.png" alt="russian"></img>
+                  <img
+                    className={styles['language-switcher']}
+                    src="/russian.png"
+                    alt="russian"
+                  ></img>
                 </picture>
               ) : null}
             </Link>
@@ -34,4 +42,4 @@ const LanguageSwitcher = () => {
   );
 };
 
-export default LanguageSwitcher;
+export { LanguageSwitcher };

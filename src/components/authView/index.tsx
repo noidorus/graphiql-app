@@ -4,21 +4,15 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { UserCredential } from 'firebase/auth';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { RingLoader } from 'react-spinners';
-import PageContainer from '@/components/PageContainer';
-import ROUTES from '@/constants/routes';
-import Button from '@/components/Button';
+
+import { Button, ErrorBoundaryWithMessage, PageContainer } from '@/components';
 import { getAuthError } from '@/utils/helpers';
 
+import { Props } from './types';
 import styles from './style.module.scss';
-import { ErrorBoundaryWithMessage } from '../';
-
-interface Props {
-  authCallback: (email: string, password: string) => Promise<UserCredential>;
-  page: 'SIGN_IN' | 'SIGN_UP';
-}
+import ROUTES from '@/constants/routes';
 
 const AuthView = ({ authCallback, page }: Props) => {
   const { t } = useTranslation();
@@ -144,4 +138,4 @@ const AuthView = ({ authCallback, page }: Props) => {
   );
 };
 
-export default AuthView;
+export { AuthView };
