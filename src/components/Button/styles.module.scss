@@ -1,0 +1,21 @@
+.btn {
+  background: linear-gradient(black, black) padding-box,
+    linear-gradient(to right, #5389ff, #a359ff) border-box;
+  @apply relative inline-flex justify-center gap-1 items-center px-5 py-2 rounded-lg border-2 border-transparent cursor-pointer;
+
+  transition: all 0.5s linear;
+
+  &:hover {
+    transform: scale(1.02);
+    background: linear-gradient(black, black) padding-box,
+      linear-gradient(to left, #c9380c, #f5cf27) border-box;
+  }
+
+  @media (max-width: 560px) {
+    @apply text-sm px-4 py-1;
+
+    span {
+      display: none;
+    }
+  }
+}

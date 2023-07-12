@@ -1,0 +1,50 @@
+.doc {
+  ul {
+    list-style-type: none;
+  }
+
+  &__previous {
+    transition: 0.5s all;
+    &_block {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    &_icon {
+      cursor: pointer;
+      width: 12px;
+      height: 12px;
+    }
+    &:hover {
+      text-decoration: underline;
+      color: #856cff;
+    }
+  }
+  &__main-header {
+    color: rgb(118 125 168);
+    font-size: 28px;
+  }
+  &__sub-header {
+    color: #856cff;
+    font-size: 22px;
+  }
+  &__field-name {
+    color: #4e5471;
+  }
+
+  &__field-link {
+    transition: 0.5s all;
+    cursor: pointer;
+    color: rgb(118 125 168);
+
+    &:hover {
+      color: #856cff;
+      text-decoration: underline;
+    }
+  }
+  &__one-position {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+  }
+}

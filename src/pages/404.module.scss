@@ -1,0 +1,31 @@
+.error {
+  @apply flex justify-center items-center gap-5 w-full;
+
+  @media (max-width: 768px) {
+    @apply flex-col;
+  }
+
+  &__block {
+    @apply flex justify-center items-center gap-5 flex-col;
+  }
+
+  &__title {
+    @apply text-5xl;
+
+    @media (max-width: 768px) {
+      @apply text-3xl;
+    }
+  }
+
+  &__text {
+    @apply text-2xl;
+
+    @media (max-width: 768px) {
+      @apply text-xl;
+    }
+  }
+
+  &__img {
+    @apply w-2/5;
+  }
+}

@@ -1,0 +1,105 @@
+.form {
+  @apply flex flex-col max-w-md gap-8 text-white relative;
+
+  &__wrapper {
+    @apply flex justify-center gap-24 mt-32;
+  }
+
+  &__loading {
+    background-color: rgba(0, 0, 0, 0.7);
+    @apply flex justify-center items-center absolute inset-0;
+    z-index: 100;
+  }
+
+  &__title {
+    @apply flex flex-col gap-6 text-5xl text-center pb-2 mt-8;
+
+    span {
+      background: linear-gradient(108.92deg, #a359ff 46.18%, #00cbff 62.94%);
+      @apply text-transparent bg-clip-text;
+    }
+
+    &_link {
+      background: linear-gradient(90deg, #ff6c59, #a359ff);
+      @apply text-transparent bg-clip-text;
+      transition: all linear 0.6s;
+
+      &:hover {
+        background-position: center right -300px;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__controls {
+    @apply flex flex-col gap-12;
+  }
+
+  &__error {
+    @apply text-red-600 ml-1 mt-1;
+  }
+
+  &__item {
+    @apply relative;
+  }
+
+  &__input {
+    @apply w-full appearance-none text-xl bg-white font-semibold duration-500 outline-none;
+    @apply rounded-md border-2 border-blue-700 text-black;
+
+    font-family: 'Open Sans', sans-serif;
+    padding: 13px 12px 16px 12px;
+    transition-property: border-color, padding-top, padding-bottom;
+
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &::placeholder {
+      color: #9c9c9c;
+      font-weight: 400;
+    }
+
+    &:focus {
+      @apply pt-6 pb-1;
+    }
+
+    &:focus + label {
+      @apply bg-blue-600 text-white top-px border-blue-600;
+      border-radius: 8px 0 8px 0;
+    }
+  }
+
+  &__label {
+    @apply absolute bg-black text-blue-600 inline-block duration-500 font-semibold text-sm;
+    @apply -top-6 left-0;
+
+    border-left: 5px solid black;
+    border-radius: 8px 0 8px 0;
+    padding: 2px 9px 2px 5px;
+    transition-property: background, border-color, color, padding, top, left;
+  }
+
+  button + p {
+    @apply text-center;
+  }
+
+  a {
+    @apply text-blue-700;
+  }
+}
+
+@media (max-width: 700px) {
+  .form {
+    &__wrapper {
+      @apply flex-col items-center m-0 gap-8;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .form {
+    &__title {
+      @apply text-3xl gap-0;
+    }
+  }
+}
